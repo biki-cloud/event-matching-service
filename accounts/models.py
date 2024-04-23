@@ -76,6 +76,7 @@ class UserManager(BaseUserManager):
             )
         return self.none()
 
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
 
@@ -133,5 +134,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if self.birth_date:
             today = date.today()
             return today.year - self.birth_date.year - (
-                        (today.month, today.day) < (self.birth_date.month, self.birth_date.day))
+                    (today.month, today.day) < (self.birth_date.month, self.birth_date.day))
         return None
