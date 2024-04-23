@@ -110,12 +110,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     bio = models.TextField(blank=True, null=True)
     location = models.CharField(max_length=50, blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
+    role_name = models.CharField(max_length=50, blank=True, null=True)
 
     objects = UserManager()
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "bio", "location", "birth_date"]  # 追加
+    REQUIRED_FIELDS = ["username", "bio", "location", "birth_date", "role_name"]  # 追加
 
     class Meta:
         verbose_name = _("user")
