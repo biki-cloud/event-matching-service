@@ -106,17 +106,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
-
-    bio = models.TextField(blank=True, null=True)
-    location = models.CharField(max_length=50, blank=True, null=True)
-    birth_date = models.DateField(blank=True, null=True)
     role_name = models.CharField(max_length=50, blank=True, null=True)
 
     objects = UserManager()
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "bio", "location", "birth_date", "role_name"]  # 追加
+    REQUIRED_FIELDS = ["username", "role_name"]  # 追加
 
     class Meta:
         verbose_name = _("user")
@@ -131,9 +127,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
-    def get_age(self):
-        if self.birth_date:
-            today = date.today()
-            return today.year - self.birth_date.year - (
-                    (today.month, today.day) < (self.birth_date.month, self.birth_date.day))
-        return None
+
+class Organizer(CustomUser):
+    class Meta:
+        proxy = True
+        verbose_name = "Organizer"
+        verbose_name_plural = "Organizers"
+
+    def save(self, *args, **kwargs):
+        self.is_staff = True
+        self.role_name = "Organizer"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.username
