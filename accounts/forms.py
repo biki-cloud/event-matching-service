@@ -9,10 +9,6 @@ class SignupForm(UserCreationForm):
         fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2']
 
 
-class OrganizerSignupForm(UserCreationForm):
-    class Meta:
-        model = Organizer
-        fields = [Organizer.USERNAME_FIELD] + Organizer.REQUIRED_FIELDS + ['password1', 'password2']
 
 class LoginForm(AuthenticationForm):
     pass

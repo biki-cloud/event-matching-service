@@ -126,18 +126,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
-
-
-class Organizer(CustomUser):
-    class Meta:
-        proxy = True
-        verbose_name = "Organizer"
-        verbose_name_plural = "Organizers"
-
-    def save(self, *args, **kwargs):
-        self.is_staff = True
-        self.role_name = "Organizer"
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return self.username
