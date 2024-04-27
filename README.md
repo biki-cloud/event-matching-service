@@ -20,5 +20,7 @@ $ python manage.py migrate
 #### 管理サイトへログイン
 http://127.0.0.1:8000/admin
 
-# 最初のmigrationをする前にカスタムユーザを作成する必要がある。
-https://denno-sekai.com/django-customuser-abstractbaseuser/
+# 参考ドキュメント
+- [Djangoでカスタムユーザーを作ってみよう【AbstractBaseUser】](https://denno-sekai.com/django-customuser-abstractbaseuser/)
+- [【Django】データベースを初期化する方法【リセット】 | アントレプレナー](https://kosuke-space.com/django-migration-reset)
+- [Djangoでカスタムユーザーを作ってみよう【AbstractBaseUser】](https://denno-sekai.com/django-customuser-abstractbaseuser/)
