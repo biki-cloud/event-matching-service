@@ -5,13 +5,19 @@ from django.contrib import admin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.forms import UserChangeForm
-from .models import CustomUser
+from .models import CustomUser, OrganizerProfile
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = CustomUser
         fields = ('email', 'password', 'is_active', 'is_staff')
+
+
+class OrganizerProfileInline(admin.StackedInline):
+    model = OrganizerProfile
+    can_delete = False
+    verbose_name_plural = 'Organizer Profile'
 
 
 class CustomUserAdmin(DefaultUserAdmin):
@@ -25,7 +31,7 @@ class CustomUserAdmin(DefaultUserAdmin):
                                     'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
+    inlines = (OrganizerProfileInline,)
 
-from .models import CustomUser
 
-admin.site.register(CustomUser)
+admin.site.register(CustomUser, CustomUserAdmin)

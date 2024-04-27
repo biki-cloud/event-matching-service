@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.apps import apps
 from django.contrib import auth
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
@@ -106,13 +104,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
-    role_name = models.CharField(max_length=50, blank=True, null=True)
 
     objects = UserManager()
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "role_name"]  # 追加
+    REQUIRED_FIELDS = ["username"]  # 追加
 
     class Meta:
         verbose_name = _("user")
@@ -127,16 +124,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    def __str__(self):
+        return self.email
+
 
 GENDER_CHOICES = (
     ("女性", "女性"),
     ("男性", "男性"),
 )
 
-class Profile(models.Model):
+
+class OrganizerProfile(models.Model):
     phone = models.CharField("電話番号", max_length=255, blank=True)
     gendar = models.CharField("性別", max_length=2, choices=GENDER_CHOICES, blank=True)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="organizer_profile")
 
     def __str__(self):
-        return self.user
+        return self.user.email

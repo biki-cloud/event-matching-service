@@ -56,7 +56,7 @@ ROOT_URLCONF = 'miccle2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["miccle2/templates/miccle2"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

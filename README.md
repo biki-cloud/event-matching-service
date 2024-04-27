@@ -16,7 +16,39 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 ```
 
+#### マイグレーションのスクリプト
+```bash
+$ ./migrations.sh
+```
+
+## DBについて
+### sqliteにてテーブルを確認
+```bash
+$ sqlite3 db.sqlite3
+# テーブル一覧を表示
+sqlite> .tables
+
+# テーブルの情報を表示
+sqlite> select * from <table name>;
+
+# テーブルを抜ける
+sqlite> .exit
+```
+
+### DBのリセット
+#### 1. パスワードを設定
+password.txtにsuperuserのパスワードを設定
+
+#### 2. DBのリセットスクリプトを実行
+```bash
+$ db_reset.sh
+```
+
+
 ### ブラウザアクセス
+#### ホーム画面
+http://127.0.0.1:8000
+
 #### 管理サイトへログイン
 http://127.0.0.1:8000/admin
 
@@ -24,3 +56,4 @@ http://127.0.0.1:8000/admin
 - [Djangoでカスタムユーザーを作ってみよう【AbstractBaseUser】](https://denno-sekai.com/django-customuser-abstractbaseuser/)
 - [【Django】データベースを初期化する方法【リセット】 | アントレプレナー](https://kosuke-space.com/django-migration-reset)
 - [Djangoでカスタムユーザーを作ってみよう【AbstractBaseUser】](https://denno-sekai.com/django-customuser-abstractbaseuser/)
+- [Djangoでcreatesuperuserを自動化したいときに使えるオプション(--noinput) - delhi09の勉強日記](https://kamatimaru.hatenablog.com/entry/2021/02/28/030646)
