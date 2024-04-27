@@ -26,7 +26,7 @@
       <td>{{ event.name }}</td>
       <td><a href="{% url 'event_detail' event.pk %}" class="btn btn-primary">詳細</a></td>
       <td>{{ event.organizer }}</td>
-      {% if organizer.is_authenticated and organizer.pk != event.organizer.pk %}
+      {% if organizer.is_authenticated and organizer.pk != event.organizer.pk or organizer.is_superuser %}
         <td><a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a></td>
         <td><a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a></td>
       {% else %}
