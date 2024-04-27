@@ -126,3 +126,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+
+GENDER_CHOICES = (
+    ("女性", "女性"),
+    ("男性", "男性"),
+)
+
+class Profile(models.Model):
+    phone = models.CharField("電話番号", max_length=255, blank=True)
+    gendar = models.CharField("性別", max_length=2, choices=GENDER_CHOICES, blank=True)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
+
+    def __str__(self):
+        return self.user

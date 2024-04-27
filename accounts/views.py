@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, ProfileForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
@@ -54,3 +54,30 @@ def profile_view(request):
     }
 
     return render(request, 'accounts/profile.html', params)
+
+
+def new(request):
+    form = SignupForm(request.POST or None)
+    profile_form = ProfileForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid() and profile_form.is_valid():
+        # Userモデル処理
+        user = form.save(commit=False)
+        user.is_staff = True
+        user.save()
+
+        # Profileモデルの処理
+        profile = profile_form.save(commit=False)
+        profile.user = user
+        profile.save()
+
+        login(
+            request, user, backend="django.contrib.auth.backends.ModelBackend")
+
+        return redirect(to='/accounts/profile/')
+
+    context = {
+        "form": form,
+        "profile_form": profile_form,
+    }
+    return render(request, 'accounts/form.html', context)
