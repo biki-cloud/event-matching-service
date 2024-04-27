@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser, Organizer
+from .models import CustomUser, Profile
 
 
 class SignupForm(UserCreationForm):
@@ -9,10 +9,17 @@ class SignupForm(UserCreationForm):
         fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2']
 
 
-class OrganizerSignupForm(UserCreationForm):
+class ProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['gendar'].widget.attrs['class'] = 'form-control'
+        self.fields['phone'].widget.attrs['class'] = 'form-control'
+
     class Meta:
-        model = Organizer
-        fields = [Organizer.USERNAME_FIELD] + Organizer.REQUIRED_FIELDS + ['password1', 'password2']
+        model = Profile
+        fields = (
+            "gendar", "phone"
+        )
 
 class LoginForm(AuthenticationForm):
     pass
