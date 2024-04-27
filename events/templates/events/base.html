@@ -12,6 +12,17 @@
   </head>
   <body>
     <h1>miccle</h1>
+    {% if request.user.is_authenticated %}
+      <p>ログインユーザ: {{ request.user }}</p>
+      <a href="{% url 'organizer_logout' %}" class="btn btn-primary mb-3">ログアウト</a>
+    {% else %}
+      <p>未ログイン</p>
+      <a href="{% url 'organizer_login' %}?next={{ request.path }}" class="btn btn-primary mb-3">ログイン</a>
+      <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
+    {% endif %}
+
+    <ul><a href="{% url 'accounts_home' %}">accounts</a></ul>
+    <ul><a href="{% url 'events_home' %}">events</a></ul>
     <ul><a href="{% url 'organizer_logout' %}" >Organizer logout</a></ul>
     <div class="container">
         {% block content %}

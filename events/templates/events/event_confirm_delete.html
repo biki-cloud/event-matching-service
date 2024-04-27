@@ -1,3 +1,6 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
 <form method="post" class="mt-4">
   {% csrf_token %}
   <div class="alert alert-danger" role="alert">
@@ -6,3 +9,5 @@
   {{ form.as_p }}
   <input type="submit" class="btn btn-danger" value="削除を確認">
 </form>
+
+{% endblock %}

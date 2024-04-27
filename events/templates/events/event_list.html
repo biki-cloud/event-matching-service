@@ -4,7 +4,6 @@
  <!-- ログインしている場合 -->
   {% if organizer.is_authenticated %}
     <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
-    <p>ログインユーザ: {{ organizer }}</p>
   {% else %}
     <p>ログインしていません</p>
     <a href="{% url 'organizer_login' %}?next={{ request.path }}" class="btn btn-primary mb-3">ログイン</a>
