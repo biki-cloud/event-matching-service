@@ -1,5 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <form method="post" class="mt-4">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" class="btn btn-primary" value="保存">
 </form>
+
+{% endblock %}
