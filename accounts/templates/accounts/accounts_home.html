@@ -1,5 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>アカウントホーム画面</h1>
 
 <a href="{% url 'organizer_signup'%}">イベント主催者登録</a>
 <br>
 <a href="{% url 'organizer_login'%}">イベント主催者ログイン</a>
+<br>
+<a href="{% url 'organizer_logout'%}">イベント主催者ログアウト</a>
+
+{% endblock %}

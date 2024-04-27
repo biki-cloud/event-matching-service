@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm, LoginForm, ProfileForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
 
@@ -61,6 +61,11 @@ def organizer_profile(request):
     }
 
     return render(request, 'accounts/organizer_profile.html', params)
+
+
+def organizer_logout(request):
+    logout(request)
+    return redirect(to='/accounts/organizer_login/')
 
 
 def accounts_home(request):

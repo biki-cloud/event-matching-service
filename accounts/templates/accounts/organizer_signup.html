@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>イベント主催者用のユーザ登録フォーム</h1>
 <form class="my-form" action="" method="POST">
   <div class="form-group">
@@ -44,3 +48,5 @@
   </div>
   {% csrf_token %}
 </form>
+
+{% endblock %}
