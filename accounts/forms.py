@@ -9,7 +9,7 @@ class SignupForm(UserCreationForm):
         fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2']
 
 
-class ProfileForm(forms.ModelForm):
+class OrganizerProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['gendar'].widget.attrs['class'] = 'form-control'

@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm, ProfileForm
+from .forms import SignupForm, LoginForm, OrganizerProfileForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
 
 def organizer_signup(request):
     form = SignupForm(request.POST or None)
-    profile_form = ProfileForm(request.POST or None)
+    profile_form = OrganizerProfileForm(request.POST or None)
 
     if request.method == "POST" and form.is_valid() and profile_form.is_valid():
         # Userモデル処理
