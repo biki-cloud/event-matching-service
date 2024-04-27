@@ -3,29 +3,40 @@
 {% block content %}
  <!-- ログインしている場合 -->
   {% if organizer.is_authenticated %}
-    <a href="{% url 'event_create' %}">新規作成</a>
+    <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
     <p>ログインユーザ: {{ organizer }}</p>
   {% else %}
     <p>ログインしていません</p>
-    <a href="{% url 'organizer_login' %}?next={{ request.path }}">ログイン</a>
+    <a href="{% url 'organizer_login' %}?next={{ request.path }}" class="btn btn-primary mb-3">ログイン</a>
   {% endif %}
 
 <h1>イベント一覧</h1>
-<hr>{%for event in events %}
-  <h2>{{event.name}}</h2>
-  <a href="{% url 'event_detail' event.pk %}">詳細</a>
-  <br>
-  <p>作成者: {{ event.organizer }}</p>
-
-  <!-- ログインユーザとイベント作成者が同じ場合に編集が可能 if文の条件をもっと綺麗にしたい,,,, -->
-  {% if organizer.is_authenticated and organizer.pk != event.organizer.pk %}
-    <a href="{% url 'event_update' event.pk %}">編集</a>
-    <br>
-    <a href="{% url 'event_delete' event.pk %}">削除</a>
-  {% endif %}
-
-{%endfor%}
-
-
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">イベント名</th>
+      <th scope="col">詳細</th>
+      <th scope="col">作成者</th>
+      <th scope="col">編集</th>
+      <th scope="col">削除</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for event in events %}
+    <tr>
+      <td>{{ event.name }}</td>
+      <td><a href="{% url 'event_detail' event.pk %}" class="btn btn-primary">詳細</a></td>
+      <td>{{ event.organizer }}</td>
+      {% if organizer.is_authenticated and organizer.pk != event.organizer.pk %}
+        <td><a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a></td>
+        <td><a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a></td>
+      {% else %}
+        <td></td>
+        <td></td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}
