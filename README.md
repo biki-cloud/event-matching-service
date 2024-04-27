@@ -16,6 +16,26 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 ```
 
+## DBについて
+### sqliteにてテーブルを確認
+```bash
+$ sqlite3 db.sqlite3
+# テーブル一覧を表示
+sqlite> .tables
+
+# テーブルの情報を表示
+sqlite> select * from <table name>;
+
+# テーブルを抜ける
+sqlite> .exit
+```
+
+### DBのリセット
+```bash
+$ db_reset.sh
+```
+
+
 ### ブラウザアクセス
 #### 管理サイトへログイン
 http://127.0.0.1:8000/admin

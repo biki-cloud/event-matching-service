@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser, Profile
+from .models import CustomUser, OrganizerProfile
 
 
 class SignupForm(UserCreationForm):
@@ -16,7 +16,7 @@ class ProfileForm(forms.ModelForm):
         self.fields['phone'].widget.attrs['class'] = 'form-control'
 
     class Meta:
-        model = Profile
+        model = OrganizerProfile
         fields = (
             "gendar", "phone"
         )

@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.apps import apps
 from django.contrib import auth
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
@@ -133,10 +131,11 @@ GENDER_CHOICES = (
     ("男性", "男性"),
 )
 
-class Profile(models.Model):
+
+class OrganizerProfile(models.Model):
     phone = models.CharField("電話番号", max_length=255, blank=True)
     gendar = models.CharField("性別", max_length=2, choices=GENDER_CHOICES, blank=True)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="profile")
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="organizer_profile")
 
     def __str__(self):
         return self.user
