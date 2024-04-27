@@ -104,13 +104,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
-    role_name = models.CharField(max_length=50, blank=True, null=True)
 
     objects = UserManager()
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "role_name"]  # 追加
+    REQUIRED_FIELDS = ["username"]  # 追加
 
     class Meta:
         verbose_name = _("user")
@@ -125,6 +124,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """Send an email to this user."""
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    def __str__(self):
+        return self.email
+
 
 GENDER_CHOICES = (
     ("女性", "女性"),
@@ -138,4 +140,4 @@ class OrganizerProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="organizer_profile")
 
     def __str__(self):
-        return self.user
+        return self.user.email

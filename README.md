@@ -16,6 +16,11 @@ $ python manage.py makemigrations
 $ python manage.py migrate
 ```
 
+#### マイグレーションのスクリプト
+```bash
+$ ./migrations.sh
+```
+
 ## DBについて
 ### sqliteにてテーブルを確認
 ```bash
@@ -31,12 +36,19 @@ sqlite> .exit
 ```
 
 ### DBのリセット
+#### 1. パスワードを設定
+password.txtにsuperuserのパスワードを設定
+
+#### 2. DBのリセットスクリプトを実行
 ```bash
 $ db_reset.sh
 ```
 
 
 ### ブラウザアクセス
+#### ホーム画面
+http://127.0.0.1:8000
+
 #### 管理サイトへログイン
 http://127.0.0.1:8000/admin
 

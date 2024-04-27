@@ -11,4 +11,7 @@ python manage.py makemigrations
 python manage.py migrate
 
 # Create superuser
-# python manage.py createsuperuser
+export DJANGO_SUPERUSER_USERNAME=admin
+export DJANGO_SUPERUSER_EMAIL=admin@example.com
+export DJANGO_SUPERUSER_PASSWORD=$(cat password.txt)
+python manage.py createsuperuser --noinput

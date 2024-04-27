@@ -3,7 +3,7 @@ from django.urls import path
 from .views import EventList, EventDetail, EventCreate, EventUpdate, EventDelete
 
 urlpatterns = [
-    path("", EventList.as_view(), name="event_list"),
+    path("", EventList.as_view(), name="events_home"),
     path("list", EventList.as_view(), name="event_list"),
     path('create', EventCreate.as_view(), name="event_create"),
     path("<int:pk>/detail", EventDetail.as_view(), name="event_detail"),
