@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>イベント主催者用のプロフィール</h1>
+<h1>アカウントプロフィール</h1>
 <h1>名前：{{ user }}</h1>
 <h1>email：{{ user.email }}</h1>
 
+<h1>Organizer情報</h1>
 性別:{{ user.organizer_profile.gendar }}<br>
 電話:{{ user.organizer_profile.phone }}<br>
+
+<h1>Vendor情報</h1>
+会社名:{{ user.vendor_profile.vendor_name }}<br>
 
 {% endblock %}

@@ -14,11 +14,11 @@
     <h1>miccle</h1>
     {% if request.user.is_authenticated %}
       <p>ログインユーザ: {{ request.user }}</p>
-      <a href="{% url 'organizer_logout' %}" class="btn btn-primary mb-3">ログアウト</a>
+      <a href="{% url 'logout' %}" class="btn btn-primary mb-3">ログアウト</a>
     {% else %}
       <p>未ログイン</p>
-      <a href="{% url 'organizer_login' %}?next={{ request.path }}" class="btn btn-primary mb-3">ログイン</a>
-      <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
+      <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary mb-3">ログイン</a>
+      <a href="{% url 'signup' %}" class="btn btn-primary mb-3">アカウント新規作成</a>
     {% endif %}
 
     <ul><a href="{% url 'accounts_home' %}">accounts</a></ul>
