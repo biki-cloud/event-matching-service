@@ -36,8 +36,10 @@ sqlite> .exit
 ```
 
 ### DBのリセット
-#### 1. パスワードを設定
-password.txtにsuperuserのパスワードを設定
+#### 1. スーパユーザのemailとパスワードを設定
+- secrets/admin_email.txtにemailを記載
+- secrets/admin_password.txtにパスワードを記載
+※作成されている場合は不要
 
 #### 2. DBのリセットスクリプトを実行
 ```bash
@@ -61,7 +63,6 @@ http://127.0.0.1:8000/admin
 - [【ソースコード付き】Django SNS アプリの作り方｜Shogo Saito](https://note.com/saito_pythonista/n/n6550f5c2a07b)
 
 # TODO
-- ユーザアカウントの表示、編集画面
-  - OrganizerProfileとVendorProfileを表示、編集できるようにする
-- vendorのアカウント作成
-- vendorがイベントに参加できるようにする
+- ユーザアカウント情報の編集
+  - OrganizerProfileとVendorProfileを編集できるようにする
+- vendorがイベントに参加できる機能を追加

@@ -19,6 +19,7 @@ class OrganizerProfileInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = 'Organizer Profile'
 
+
 class VendorProfileInline(admin.StackedInline):
     model = VendorProfile
     can_delete = False

@@ -12,8 +12,8 @@ python manage.py migrate
 
 # Create superuser
 export DJANGO_SUPERUSER_USERNAME=admin
-export DJANGO_SUPERUSER_EMAIL=admin@example.com
-export DJANGO_SUPERUSER_PASSWORD=$(cat password.txt)
+export DJANGO_SUPERUSER_EMAIL=$(cat secrets/admin_email.txt)
+export DJANGO_SUPERUSER_PASSWORD=$(cat secrets/admin_password.txt)
 python manage.py createsuperuser --noinput
 
 # Create regular user with OrganizerProfile
