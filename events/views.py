@@ -17,7 +17,7 @@ class EventList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['organizer'] = self.request.user
+        context['user'] = self.request.user
         return context
 
 
@@ -27,7 +27,7 @@ class EventDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['organizer'] = self.request.user
+        context['user'] = self.request.user
         return context
 
 

@@ -2,7 +2,7 @@
 
 {% block content %}
  <!-- ログインしている場合 -->
-  {% if organizer.is_authenticated %}
+  {% if user.is_authenticated %}
     <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
   {% endif %}
 
@@ -23,7 +23,12 @@
       <td>{{ event.name }}</td>
       <td><a href="{% url 'event_detail' event.pk %}" class="btn btn-primary">詳細</a></td>
       <td>{{ event.organizer }}</td>
-      {% if organizer.is_authenticated and organizer.pk != event.organizer.pk or organizer.is_superuser %}
+      <!-- 編集ができる条件 -->
+      <!-- ユーザが認証されている + イベントの作成者だったら -->
+      <!-- ユーザが認証されている + 参加者だったらイベント参加するように編集できる -->
+      <!-- 削除ができる条件 -->
+      <!-- ユーザが認証されている + イベントの作成者だったら -->
+      {% if user.is_authenticated and user.pk != event.organizer.pk or user.is_superuser %}
         <td><a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a></td>
         <td><a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a></td>
       {% else %}

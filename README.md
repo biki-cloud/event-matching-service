@@ -63,6 +63,13 @@ http://127.0.0.1:8000/admin
 - [【ソースコード付き】Django SNS アプリの作り方｜Shogo Saito](https://note.com/saito_pythonista/n/n6550f5c2a07b)
 
 # TODO
+- vendorがイベントに参加できる機能を追加
 - ユーザアカウント情報の編集
   - OrganizerProfileとVendorProfileを編集できるようにする
-- vendorがイベントに参加できる機能を追加
+- イベント参加者がイベントを編集、削除できる状態になっているので解消。
+- accountsにvendorとorganizerを紐付けるのはわかるけど、イベント画面のときに現在どっちの役割として操作しているか確認する方法が必要
+  - user.get_role()で取得できるようにする 
+  - 今は一つのアカウントで両方の役割を持てるが、それは管理する上では難しい気がする。
+  - vendorとorganizerの両方の役割と持つ人がどれくらいいるのか
+  - 方法１：アカウントは一つで、vendorとorganizerの役割を持つ場合、どちらの役割でログインしているかを判別するように機能を追加する
+  - 方法２：アカウントを別にして、vendorとorganizerで別々のアカウントでログインしてもらう
