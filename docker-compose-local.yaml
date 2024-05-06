@@ -12,3 +12,5 @@ services:
     container_name: miccle
     tty: true # ポート待受とかしていないコンテナの場合、trueに設定しておくとコンテナが起動し続けます
     working_dir: '/app'
+    # 開発環境でのコマンドを指定します
+    command: python manage.py runserver 0.0.0.0:8000
