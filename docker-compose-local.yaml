@@ -1,0 +1,16 @@
+# ローカルで起動するためのdocker-composeファイルです
+# pythonファイルを更新すると自動で反映されるようになっています
+version: '3'
+services:
+  mysite:
+    build:
+      dockerfile: Dockerfile # Dockerfileのディレクトリを指定します
+    volumes:
+      - '.:/app'
+    ports:
+      - "8000:8000" # 左側が外部からのアクセス時のポート番号:右側がdockerコンテナからアクセスする時のポート番号。ホストの8000番からコンテナの8000番へポートフォワードしています
+    container_name: miccle
+    tty: true # ポート待受とかしていないコンテナの場合、trueに設定しておくとコンテナが起動し続けます
+    working_dir: '/app'
+    # 開発環境でのコマンドを指定します
+    command: python manage.py runserver 0.0.0.0:8000

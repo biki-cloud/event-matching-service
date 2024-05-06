@@ -2,11 +2,12 @@
 
 {% block content %}
 <h1>アカウントホーム画面</h1>
-
-<a href="{% url 'organizer_signup'%}">イベント主催者登録</a>
+<a href="{% url 'signup'%}">新規登録</a>
 <br>
-<a href="{% url 'organizer_login'%}">イベント主催者ログイン</a>
+<a href="{% url 'login'%}">ログイン</a>
 <br>
-<a href="{% url 'organizer_logout'%}">イベント主催者ログアウト</a>
+<a href="{% url 'logout'%}">ログアウト</a>
+<br>
+<a href="{% url 'profile'%}">ユーザ情報</a>
 
 {% endblock %}

@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DefaultUserAdmin
 from django.contrib.auth.forms import UserChangeForm
-from .models import CustomUser, OrganizerProfile
+from .models import CustomUser, OrganizerProfile, VendorProfile
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -20,6 +20,12 @@ class OrganizerProfileInline(admin.StackedInline):
     verbose_name_plural = 'Organizer Profile'
 
 
+class VendorProfileInline(admin.StackedInline):
+    model = VendorProfile
+    can_delete = False
+    verbose_name_plural = 'Vendor Profile'
+
+
 class CustomUserAdmin(DefaultUserAdmin):
     form = CustomUserChangeForm
     add_form = DefaultUserAdmin.add_form
@@ -31,7 +37,7 @@ class CustomUserAdmin(DefaultUserAdmin):
                                     'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
-    inlines = (OrganizerProfileInline,)
+    inlines = (OrganizerProfileInline, VendorProfileInline,)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

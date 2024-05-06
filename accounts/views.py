@@ -1,37 +1,48 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm, ProfileForm
+from .forms import SignupForm, LoginForm, OrganizerProfileForm, VendorProfileForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 
 
-def organizer_signup(request):
-    form = SignupForm(request.POST or None)
-    profile_form = ProfileForm(request.POST or None)
+def accounts_home(request):
+    return render(request, 'accounts/accounts_home.html')
 
-    if request.method == "POST" and form.is_valid() and profile_form.is_valid():
+
+def signup(request):
+    form = SignupForm(request.POST or None)
+    organizer_profile_form = OrganizerProfileForm(request.POST or None)
+    vendor_profile_form = VendorProfileForm(request.POST or None)
+
+    if request.method == "POST" and form.is_valid():
         # Userモデル処理
         user = form.save(commit=False)
-        user.is_staff = True
         user.save()
 
-        # Profileモデルの処理
-        profile = profile_form.save(commit=False)
-        profile.user = user
-        profile.save()
+        # organizerモデルがフォームで入力されていれば保存
+        if organizer_profile_form.is_valid():
+            organizer_profile = organizer_profile_form.save(commit=False)
+            organizer_profile.user = user
+            organizer_profile.save()
 
-        login(
-            request, user, backend="django.contrib.auth.backends.ModelBackend")
+        # vendorモデルがフォームで入力されていれば保存
+        if vendor_profile_form.is_valid():
+            vendor_profile = vendor_profile_form.save(commit=False)
+            vendor_profile.user = user
+            vendor_profile.save()
 
-        return redirect(to='/accounts/organizer_profile/')
+        login(request, user)
+
+        return redirect(to='/accounts/profile/')
 
     context = {
         "form": form,
-        "profile_form": profile_form,
+        "profile_form": organizer_profile_form,
+        "vendor_profile_form": vendor_profile_form,
     }
-    return render(request, 'accounts/organizer_signup.html', context)
+    return render(request, 'accounts/signup.html', context)
 
 
-def organizer_login(request):
+def user_login(request):
     if request.method == 'POST':
         next = request.POST.get('next')
         form = LoginForm(request, data=request.POST)
@@ -41,7 +52,7 @@ def organizer_login(request):
 
             if user:
                 login(request, user)
-                return redirect(to='/accounts/organizer_profile/')
+                return redirect(to='/accounts/profile/')
 
     else:
         form = LoginForm()
@@ -50,23 +61,19 @@ def organizer_login(request):
         'form': form,
     }
 
-    return render(request, 'accounts/organizer_login.html', param)
+    return render(request, 'accounts/login.html', param)
 
 
 @login_required
-def organizer_profile(request):
+def profile(request):
     user = request.user
 
     params = {
     }
 
-    return render(request, 'accounts/organizer_profile.html', params)
+    return render(request, 'accounts/profile.html', params)
 
 
-def organizer_logout(request):
+def user_logout(request):
     logout(request)
-    return redirect(to='/accounts/organizer_login/')
-
-
-def accounts_home(request):
-    return render(request, 'accounts/accounts_home.html')
+    return redirect(to='/accounts/login/')

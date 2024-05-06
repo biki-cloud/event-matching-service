@@ -4,7 +4,7 @@ from django.db import models
 
 from django.db import models
 
-from accounts.models import OrganizerProfile
+from accounts.models import OrganizerProfile, VendorProfile
 
 
 class Event(models.Model):
@@ -14,7 +14,10 @@ class Event(models.Model):
     location = models.CharField(max_length=200,
                                 default="default location")
     description = models.TextField(default="default description")
+    # イベントを作成した主催者を特定するための外部キー
     organizer = models.ForeignKey(OrganizerProfile, on_delete=models.CASCADE)
+    # イベントに参加するベンダーを特定するための多対多の関係
+    vendors = models.ManyToManyField(VendorProfile, blank=True, related_name="vendors")
 
     def __str__(self):
         return self.name

@@ -1,6 +1,6 @@
 import json
 from django.contrib.auth import get_user_model
-from accounts.models import OrganizerProfile
+from accounts.models import OrganizerProfile, VendorProfile
 from events.models import Event
 
 # JSON形式のデータを定義
@@ -45,8 +45,11 @@ data = [
     }
 ]
 
+events = []
+
 # ユーザーとイベントを作成するためのforループ
 for entry in data:
+    print("#" * 100)
     # ユーザーを作成
     User = get_user_model()
     user = User.objects.create_user(
@@ -54,18 +57,20 @@ for entry in data:
         email=entry['email'],
         password=entry['password']
     )
-    print("#" * 100)
+    print("*" * 50)
     print("created user")
     print(user.__dict__)
 
     # OrganizerProfileを作成
     organizer_profile = OrganizerProfile.objects.create(user=user)
-    print("#" * 100)
+    print("*" * 50)
     print("created organizer profile")
     print(organizer_profile.__dict__)
 
+
+
     # イベントを作成
-    for event_info in entry['events']:
+    for idx, event_info in enumerate(entry['events']):
         event = Event.objects.create(
             name=event_info['event_name'],
             date=event_info['event_date'],
@@ -73,6 +78,25 @@ for entry in data:
             description=event_info['event_description'],
             organizer=organizer_profile
         )
-        print("#" * 100)
-        print("created event")
+        events.append(event)
+        print("*" * 50)
+        print("created event " + str(idx + 1))
         print(event.__dict__)
+        print(event.vendors.all())
+
+# Vendorを作成
+User = get_user_model()
+user = User.objects.create_user(
+    username='vendor1',
+    email='vendor1@example.com',
+    password='password'
+)
+vendor_profile = VendorProfile.objects.create(user=user, vendor_name="Sample Vendor")
+print("*" * 50)
+print("created vendor profile")
+print(vendor_profile.__dict__)
+for event in events:
+    event.vendors.add(vendor_profile)
+    print("*" * 50)
+    print("added vendor to event")
+    print(event.vendors.all())
