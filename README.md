@@ -63,7 +63,7 @@ sqlite> .exit
 #### 2. DBのリセットスクリプトを実行
 
 ```bash
-$ db_reset.sh
+$ ./db_reset.sh
 ```
 
 ### ブラウザアクセス
