@@ -1,0 +1,58 @@
+{
+    "organizers": [
+        {
+            "username": "organizer1",
+            "email": "organizer1@example.com",
+            "password": "password",
+            "create_events": [
+                {
+                    "event_name": "Sample Event 1",
+                    "event_date": "2024-04-30",
+                    "event_location": "Sample Location 1",
+                    "event_description": "Sample Description 1"
+                },
+                {
+                    "event_name": "Sample Event 2",
+                    "event_date": "2024-05-01",
+                    "event_location": "Sample Location 2",
+                    "event_description": "Sample Description 2"
+                }
+            ]
+        },
+        {
+            "username": "organizer2",
+            "email": "organizer2@example.com",
+            "password": "password",
+            "create_events": [
+                {
+                    "event_name": "Sample Event 3",
+                    "event_date": "2024-05-02",
+                    "event_location": "Sample Location 3",
+                    "event_description": "Sample Description 3"
+                },
+                {
+                    "event_name": "Sample Event 4",
+                    "event_date": "2024-05-03",
+                    "event_location": "Sample Location 4",
+                    "event_description": "Sample Description 4"
+                }
+            ]
+        }
+    ],
+    "vendors": [
+        {
+            "username": "vendor1",
+            "email": "vendor1@example.com",
+            "password": "password",
+            "vendor_name": "Sample Vendor 1",
+            "apply_events": ["Sample Event 1", "Sample Event 2"]
+        },
+        {
+            "username": "vendor2",
+            "email": "vendor2@example.com",
+            "password": "password",
+            "vendor_name": "Sample Vendor 2",
+            "apply_events": ["Sample Event 3", "Sample Event 4"]
+        }
+    ]
+}
