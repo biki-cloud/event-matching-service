@@ -15,4 +15,4 @@ services:
     # 開発環境でのコマンドを指定します
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
-      - secrets/secret.env
+      - .env

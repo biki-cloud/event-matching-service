@@ -4,8 +4,8 @@
 
 | 役割      | 名称        |
 |---------|-----------
-| イベント出店者 | vendor    |
 | イベント主催者 | organizer |
+| イベント出店者 | vendor    |
 | イベント参加者 | customer  |
 
 ## 開発について
@@ -54,6 +54,18 @@ sqlite> .exit
 
 ### DBのリセット
 
+#### 環境変数をセット
+```bash
+# 以下のように環境変数をセット
+$ cat .env
+DJANGO_SUPERUSER_EMAIL=<アドミンユーザのemail>
+DJANGO_SUPERUSER_PASSWORD=<アドミンユーザのパスワード>
+ORIGIN_DOMAIN=<オリジンのドメイン>
+
+# 環境変数を読み込む
+$ source .env
+```
+
 #### 1. スーパユーザのemailとパスワードを設定
 
 - secrets/admin_email.txtにemailを記載
@@ -84,6 +96,7 @@ http://127.0.0.1:8000/admin
 - [Djangoでcreatesuperuserを自動化したいときに使えるオプション(--noinput) - delhi09の勉強日記](https://kamatimaru.hatenablog.com/entry/2021/02/28/030646)
 - [18.Djangoアプリでログイン時だけ投稿・編集を可能にしてみよう](https://denno-sekai.com/django-loginrequiredmixin/)
 - [【ソースコード付き】Django SNS アプリの作り方｜Shogo Saito](https://note.com/saito_pythonista/n/n6550f5c2a07b)
+- [EC2 amazon linux2 rootにスイッチする方法を検証してみた #AWS - Qiita](https://qiita.com/gama1234/items/23b8397d66a890771866)
 
 # TODO
 

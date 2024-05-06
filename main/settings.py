@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-xlmb#ji-j66*&#c4-4iaun$-uf21d)23rvsm@=^+x))446y^y1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# TODO: 開発段階のみ*を指定
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['HOST_NAME', '0.0.0.0', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -127,5 +126,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 CSRF_TRUSTED_ORIGINS = [
-    os.environ.get('NGROK_PUBLIC_URL')
+    os.environ.get('HOST_NAME')
 ]
