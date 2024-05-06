@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-xlmb#ji-j66*&#c4-4iaun$-uf21d)23rvsm@=^+x))446y^y1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+# TODO: 開発段階のみ*を指定
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 

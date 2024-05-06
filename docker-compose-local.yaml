@@ -2,7 +2,7 @@
 # pythonファイルを更新すると自動で反映されるようになっています
 version: '3'
 services:
-  mysite:
+  miccle:
     build:
       dockerfile: Dockerfile # Dockerfileのディレクトリを指定します
     volumes:
