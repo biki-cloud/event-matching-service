@@ -20,8 +20,7 @@
               <li>{{ vendor }}</li>
             {% endfor %}
           </ul>
-          <!-- Add this block -->
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and user.role == 'イベント出店者' %}
             <a href="{% url 'event_participation_request' event.pk %}" class="btn btn-primary">Apply to Event</a>
           {% endif %}
         </div>
