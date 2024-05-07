@@ -18,6 +18,7 @@ class Event(models.Model):
     organizer = models.ForeignKey(OrganizerProfile, on_delete=models.CASCADE)
     # イベントに参加するベンダーを特定するための多対多の関係
     vendors = models.ManyToManyField(VendorProfile, blank=True, related_name="vendors")
+    image = models.ImageField("プロフィール画像", upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return self.name

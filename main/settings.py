@@ -129,3 +129,6 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 CSRF_TRUSTED_ORIGINS = [
     os.environ.get('HOST_NAME')
 ]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
