@@ -9,6 +9,11 @@ from django.urls import reverse_lazy
 from .models import Event
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .models import Event
+from .models import VendorProfile
 
 
 class EventList(ListView):
@@ -52,3 +57,16 @@ class EventUpdate(UpdateView):
 class EventDelete(DeleteView):
     model = Event
     success_url = '/events/list'
+
+
+# 出店者からイベント申請リクエスト
+@login_required
+def event_participation_request(request, event_pk):
+    event = get_object_or_404(Event, pk=event_pk)
+    vendor_profile = get_object_or_404(VendorProfile, user=request.user)
+    if vendor_profile in event.vendors.all():
+        messages.error(request, 'You have already applied to this event.')
+    else:
+        event.vendors.add(vendor_profile)
+        messages.success(request, 'You have successfully applied to the event.')
+    return redirect('event_detail', event.pk)

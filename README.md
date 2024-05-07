@@ -100,8 +100,7 @@ http://127.0.0.1:8000/admin
 
 # TODO
 
-- vendorがイベントに参加できる機能を追加
+- アカウントはorganizer専用とvendor専用にする. user_roleを追加する。それでイベント一覧とかで役割ごとを判断する
+- 出店申請して、確定処理を行う
 - ユーザアカウント情報の編集
     - OrganizerProfileとVendorProfileを編集できるようにする
-- 出店申請して、確定処理を行う
-- アカウントはorganizer専用とvendor専用にする. user_roleを追加する。それでイベント一覧とかで役割ごとを判断する
