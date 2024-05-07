@@ -31,7 +31,14 @@
       <p class="help-block">{{ form.password2.help_text }}</p>
   </div>
 
-    <h2>Organizer用入力欄</h2>
+  <div class="form-group">
+    <label for="id_role">role</label>
+    {{ form.role }}
+    {{ form.role.errors }}
+    <p class="help-block">{{ form.role.help_text }}</p>
+  </div>
+
+  <h2>Organizer用入力欄</h2>
   <div class="form-group">
     <label for="id_gendar">性別</label>
     {{ profile_form.gendar }}
