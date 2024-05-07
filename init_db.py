@@ -15,7 +15,8 @@ for entry in data['organizers']:
     user = User.objects.create_user(
         username=entry['username'],
         email=entry['email'],
-        password=entry['password']
+        password=entry['password'],
+        role='イベント主催者'
     )
 
     # OrganizerProfileを作成
@@ -36,7 +37,8 @@ for entry in data['vendors']:
     user = User.objects.create_user(
         username=entry['username'],
         email=entry['email'],
-        password=entry['password']
+        password=entry['password'],
+        role='イベント出店者'
     )
     vendor_profile = VendorProfile.objects.create(user=user, vendor_name=entry['vendor_name'])
 

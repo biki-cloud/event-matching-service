@@ -11,7 +11,7 @@ from .models import CustomUser, OrganizerProfile, VendorProfile
 class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = CustomUser
-        fields = ('email', 'password', 'is_active', 'is_staff')
+        fields = ('email', 'password', 'is_active', 'is_staff', 'role')
 
 
 class OrganizerProfileInline(admin.StackedInline):
@@ -32,7 +32,7 @@ class CustomUserAdmin(DefaultUserAdmin):
     model = CustomUser
     list_display = ('email', 'is_staff', 'is_active')
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('email', 'password', 'role')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
                                     'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),

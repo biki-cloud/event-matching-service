@@ -31,28 +31,32 @@
       <p class="help-block">{{ form.password2.help_text }}</p>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" id="role-input">
     <label for="id_role">role</label>
     {{ form.role }}
     {{ form.role.errors }}
     <p class="help-block">{{ form.role.help_text }}</p>
   </div>
 
-  <h2>Organizer用入力欄</h2>
-  <div class="form-group">
-    <label for="id_gendar">性別</label>
-    {{ profile_form.gendar }}
+  <div class="form-group" id="organizer-input" style="display: none;">
+    <h2>Organizer用入力欄</h2>
+    <div class="form-group">
+      <label for="id_gendar">性別</label>
+      {{ profile_form.gendar }}
+    </div>
+
+    <div class="form-group">
+      <label for="id_phone">電話番号</label>
+      {{ profile_form.phone }}
+    </div>
   </div>
 
-  <div class="form-group">
-    <label for="id_phone">電話番号</label>
-    {{ profile_form.phone }}
-  </div>
-
+  <div class="form-group" id="vendor-input" style="display: none;">
     <h2>Vendor用入力欄</h2>
-  <div class="form-group">
-    <label for="id_vendor_name">会社名</label>
-    {{ vendor_profile_form.vendor_name }}
+    <div class="form-group">
+      <label for="id_vendor_name">会社名</label>
+      {{ vendor_profile_form.vendor_name }}
+    </div>
   </div>
 
   <div class="form-group">
@@ -62,5 +66,33 @@
   </div>
   {% csrf_token %}
 </form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var roleInput = document.getElementById('id_role');
+  var organizerInput = document.getElementById('organizer-input');
+  var vendorInput = document.getElementById('vendor-input');
+
+  roleInput.addEventListener('change', function() {
+    if (this.value === 'イベント主催者') {
+      organizerInput.style.display = 'block';
+      vendorInput.style.display = 'none';
+    } else if (this.value === 'イベント出店者') {
+      organizerInput.style.display = 'none';
+      vendorInput.style.display = 'block';
+    } else {
+      organizerInput.style.display = 'none';
+      vendorInput.style.display = 'none';
+    }
+  });
+
+  // 初期表示時にroleに応じて入力欄を表示する
+  if (roleInput.value === 'イベント主催者') {
+    organizerInput.style.display = 'block';
+  } else if (roleInput.value === 'イベント出店者') {
+    vendorInput.style.display = 'block';
+  }
+});
+</script>
 
 {% endblock %}

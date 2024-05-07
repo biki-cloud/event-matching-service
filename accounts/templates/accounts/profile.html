@@ -5,11 +5,31 @@
 <h1>名前：{{ user }}</h1>
 <h1>email：{{ user.email }}</h1>
 
-<h1>Organizer情報</h1>
-性別:{{ user.organizer_profile.gendar }}<br>
-電話:{{ user.organizer_profile.phone }}<br>
+<h1>role: {{ user.role }}</h1>
 
-<h1>Vendor情報</h1>
-会社名:{{ user.vendor_profile.vendor_name }}<br>
+<div id="organizer-info" style="display: none;">
+  <h1>Organizer情報</h1>
+  <p>性別: {{ user.organizer_profile.gendar }}</p>
+  <p>電話: {{ user.organizer_profile.phone }}</p>
+</div>
+
+<div id="vendor-info" style="display: none;">
+  <h1>Vendor情報</h1>
+  <p>会社名: {{ user.vendor_profile.vendor_name }}</p>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var role = "{{ user.role }}";
+  var organizerInfo = document.getElementById('organizer-info');
+  var vendorInfo = document.getElementById('vendor-info');
+
+  if (role === 'イベント主催者') {
+    organizerInfo.style.display = 'block';
+  } else if (role === 'イベント出店者') {
+    vendorInfo.style.display = 'block';
+  }
+});
+</script>
 
 {% endblock %}

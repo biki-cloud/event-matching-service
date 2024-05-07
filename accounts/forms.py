@@ -6,7 +6,7 @@ from .models import CustomUser, OrganizerProfile, VendorProfile
 class SignupForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2']
+        fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2', 'role']
 
 
 class OrganizerProfileForm(forms.ModelForm):

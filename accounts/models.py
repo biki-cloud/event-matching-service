@@ -105,6 +105,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
+    USER_ROLE_CHOICES = (
+        ("イベント主催者", "イベント主催者"),
+        ("イベント出店者", "イベント出店者"),
+        ("イベント参加者", "イベント参加者"),
+    )
+    role = models.CharField("役割", max_length=250, choices=USER_ROLE_CHOICES, blank=True)
+
     objects = UserManager()
 
     EMAIL_FIELD = "email"
