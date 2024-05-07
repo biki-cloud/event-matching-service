@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import SignupForm, LoginForm, OrganizerProfileForm, VendorProfileForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from .models import OrganizerProfile, VendorProfile
 
 
 def accounts_home(request):
@@ -68,7 +69,12 @@ def user_login(request):
 def profile(request):
     user = request.user
 
+    organizer = OrganizerProfile.objects.all().filter(user=user).first()
+    vendor = VendorProfile.objects.all().filter(user=user).first()
+
     params = {
+        'organizer': organizer,
+        'vendor': vendor,
     }
 
     return render(request, 'accounts/profile.html', params)

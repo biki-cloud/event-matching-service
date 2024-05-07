@@ -20,7 +20,11 @@ for entry in data['organizers']:
     )
 
     # OrganizerProfileを作成
-    organizer_profile = OrganizerProfile.objects.create(user=user)
+    organizer_profile = OrganizerProfile.objects.create(
+        user=user,
+        phone=entry['phone'],
+        gender=entry['gender']
+    )
 
     # イベントを作成
     for event_info in entry['create_events']:
@@ -40,7 +44,10 @@ for entry in data['vendors']:
         password=entry['password'],
         role='イベント出店者'
     )
-    vendor_profile = VendorProfile.objects.create(user=user, vendor_name=entry['vendor_name'])
+    vendor_profile = VendorProfile.objects.create(
+        user=user,
+        vendor_name=entry['vendor_name']
+    )
 
     # イベントにvendorを追加
     for event_name in entry['apply_events']:

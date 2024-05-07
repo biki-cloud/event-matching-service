@@ -12,13 +12,13 @@ class SignupForm(UserCreationForm):
 class OrganizerProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['gendar'].widget.attrs['class'] = 'form-control'
+        self.fields['gender'].widget.attrs['class'] = 'form-control'
         self.fields['phone'].widget.attrs['class'] = 'form-control'
 
     class Meta:
         model = OrganizerProfile
         fields = (
-            "gendar", "phone"
+            "gender", "phone"
         )
 
 
