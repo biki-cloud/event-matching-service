@@ -38,8 +38,9 @@ class EventDetail(DetailView):
 
 class EventCreate(CreateView):
     model = Event
-    fields = ['name', 'date', 'location', 'description']
+    fields = ['name', 'date', 'location', 'description', 'image']
     success_url = '/events/list'
+    template_name = 'events/event_create.html'
 
     def form_valid(self, form):
         # ログインしているユーザーをオーガナイザーとして設定
@@ -49,9 +50,9 @@ class EventCreate(CreateView):
 
 class EventUpdate(UpdateView):
     model = Event
-    fields = ['name', 'date', 'location', 'description']
+    fields = ['name', 'date', 'location', 'description', 'image']
     success_url = '/events/list'
-    template_name_suffix = "_update_form"
+    template_name = 'events/event_update.html'
 
 
 class EventDelete(DeleteView):
