@@ -6,7 +6,7 @@ from .models import CustomUser, OrganizerProfile, VendorProfile
 class SignupForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2', 'role']
+        fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['password1', 'password2', 'role', 'image']
 
 
 class OrganizerProfileForm(forms.ModelForm):
@@ -36,3 +36,14 @@ class VendorProfileForm(forms.ModelForm):
 
 class LoginForm(AuthenticationForm):
     pass
+
+
+class EditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = [CustomUser.USERNAME_FIELD] + CustomUser.REQUIRED_FIELDS + ['role', 'image']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields[CustomUser.USERNAME_FIELD].widget.attrs['class'] = 'form-control'
+        # 他のフォームフィールドに対する操作もここで行うことができます

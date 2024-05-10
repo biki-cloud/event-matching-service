@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm, OrganizerProfileForm, VendorProfileForm
+from .forms import SignupForm, LoginForm, OrganizerProfileForm, VendorProfileForm, EditForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import OrganizerProfile, VendorProfile
@@ -10,7 +10,7 @@ def accounts_home(request):
 
 
 def signup(request):
-    form = SignupForm(request.POST or None)
+    form = SignupForm(request.POST or None, request.FILES or None)
     organizer_profile_form = OrganizerProfileForm(request.POST or None)
     vendor_profile_form = VendorProfileForm(request.POST or None)
 
@@ -37,8 +37,8 @@ def signup(request):
 
     context = {
         "form": form,
-        "profile_form": organizer_profile_form,
-        "vendor_profile_form": vendor_profile_form,
+        "organizer_form": organizer_profile_form,
+        "vendor_form": vendor_profile_form,
     }
     return render(request, 'accounts/signup.html', context)
 
@@ -78,6 +78,45 @@ def profile(request):
     }
 
     return render(request, 'accounts/profile.html', params)
+
+
+from .forms import EditForm
+
+
+@login_required
+def profile_edit(request):
+    user = request.user
+
+    organizer = OrganizerProfile.objects.filter(user=user).first()
+    vendor = VendorProfile.objects.filter(user=user).first()
+
+    organizer_form = OrganizerProfileForm(request.POST or None, instance=organizer)
+    vendor_form = VendorProfileForm(request.POST or None, instance=vendor)
+    edit_form = EditForm(request.POST or None, request.FILES or None, instance=user)
+
+    if request.method == "POST":
+        if organizer_form.is_valid():
+            organizer = organizer_form.save(commit=False)
+            organizer.user = user
+            organizer.save()
+
+        if vendor_form.is_valid():
+            vendor = vendor_form.save(commit=False)
+            vendor.user = user
+            vendor.save()
+
+        if edit_form.is_valid():
+            edit_form.save()
+
+        return redirect(to='/accounts/profile/')
+
+    params = {
+        'organizer_form': organizer_form,
+        'vendor_form': vendor_form,
+        'form': edit_form,
+    }
+
+    return render(request, 'accounts/profile_edit.html', params)
 
 
 def user_logout(request):

@@ -6,6 +6,10 @@
 <h1>email：{{ user.email }}</h1>
 
 <h1>role: {{ user.role }}</h1>
+<h2>プロフィール画像</h2>
+{% if user.image %}
+  <img src="{{ user.image.url }}" alt="プロフィール画像" class="img-fluid">
+{% endif %}
 
 <div id="organizer-info" style="display: none;">
   <h1>Organizer情報</h1>

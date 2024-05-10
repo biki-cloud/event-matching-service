@@ -111,6 +111,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ("イベント参加者", "イベント参加者"),
     )
     role = models.CharField("役割", max_length=250, choices=USER_ROLE_CHOICES, blank=True)
+    image = models.ImageField("プロフィール画像", upload_to='images/', blank=True, null=True)
 
     objects = UserManager()
 
