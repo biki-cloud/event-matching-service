@@ -1,5 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import SignupForm, LoginForm, OrganizerProfileForm, VendorProfileForm, EditForm
+from .forms import (
+    SignupForm,
+    LoginForm,
+    OrganizerProfileForm,
+    VendorProfileForm,
+    EditForm
+)
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import OrganizerProfile, VendorProfile
@@ -78,9 +84,6 @@ def profile(request):
     }
 
     return render(request, 'accounts/profile.html', params)
-
-
-from .forms import EditForm
 
 
 @login_required

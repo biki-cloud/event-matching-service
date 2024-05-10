@@ -14,6 +14,9 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Event
 from .models import VendorProfile
+import logging
+
+logger = logging.getLogger('django')
 
 
 class EventList(ListView):
@@ -38,7 +41,7 @@ class EventDetail(DetailView):
 
 class EventCreate(CreateView):
     model = Event
-    fields = ['name', 'date', 'location', 'description', 'image']
+    fields = ['name', 'date', 'location', 'description', 'image', 'status', 'is_finished']
     success_url = '/events/list'
     template_name = 'events/event_create.html'
 
@@ -50,7 +53,7 @@ class EventCreate(CreateView):
 
 class EventUpdate(UpdateView):
     model = Event
-    fields = ['name', 'date', 'location', 'description', 'image']
+    fields = ['name', 'date', 'location', 'description', 'image', 'status', 'is_finished']
     success_url = '/events/list'
     template_name = 'events/event_update.html'
 
