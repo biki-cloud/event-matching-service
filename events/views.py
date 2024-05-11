@@ -10,10 +10,15 @@ from .models import Event, VendorProfile
 from .forms import EventForm
 import logging
 
-logger = logging.getLogger('django')
+logger = logging.getLogger('myapp')
 
 def event_list(request):
-    events = Event.objects.all() 
+    if request.user.is_anonymous:
+        events = Event.objects.filter(status='published')
+    elif request.user.role == 'イベント主催者':
+        events = Event.objects.all()
+    else:
+        events = Event.objects.filter(status='published')
     return render(request, 'events/event_list.html', {'events': events})
 
 def event_detail(request, pk):

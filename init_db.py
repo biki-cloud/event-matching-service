@@ -33,7 +33,8 @@ for entry in data['organizers']:
             date=event_info['event_date'],
             location=event_info['event_location'],
             description=event_info['event_description'],
-            organizer=organizer_profile
+            organizer=organizer_profile,
+            status=event_info['event_status']
         )
 
 # Vendorを作成

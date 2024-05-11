@@ -11,13 +11,15 @@
                     "event_name": "Sample Event 1",
                     "event_date": "2024-04-30",
                     "event_location": "Sample Location 1",
-                    "event_description": "Sample Description 1"
+                    "event_description": "Sample Description 1",
+                    "event_status": "draft"
                 },
                 {
                     "event_name": "Sample Event 2",
                     "event_date": "2024-05-01",
                     "event_location": "Sample Location 2",
-                    "event_description": "Sample Description 2"
+                    "event_description": "Sample Description 2",
+                    "event_status": "published"
                 }
             ]
         },
@@ -32,13 +34,15 @@
                     "event_name": "Sample Event 3",
                     "event_date": "2024-05-02",
                     "event_location": "Sample Location 3",
-                    "event_description": "Sample Description 3"
+                    "event_description": "Sample Description 3",
+                    "event_status": "published"
                 },
                 {
                     "event_name": "Sample Event 4",
                     "event_date": "2024-05-03",
                     "event_location": "Sample Location 4",
-                    "event_description": "Sample Description 4"
+                    "event_description": "Sample Description 4",
+                    "event_status": "draft"
                 }
             ]
         }
