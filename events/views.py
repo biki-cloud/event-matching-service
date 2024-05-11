@@ -2,65 +2,55 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse
-from django.template import loader
-from django.urls import reverse_lazy
-
 from .models import Event
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Event
-from .models import VendorProfile
+from .models import Event, VendorProfile
+from .forms import EventForm
 import logging
 
 logger = logging.getLogger('django')
 
+def event_list(request):
+    events = Event.objects.all() 
+    return render(request, 'events/event_list.html', {'events': events})
 
-class EventList(ListView):
-    model = Event
-    context_object_name = 'events'
+def event_detail(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    return render(request, 'events/event_detail.html', {'event': event})
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-
-class EventDetail(DetailView):
-    model = Event
-    context_object_name = 'event'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-
-class EventCreate(CreateView):
-    model = Event
-    fields = ['name', 'date', 'location', 'description', 'image', 'status', 'is_finished']
-    success_url = '/events/list'
-    template_name = 'events/event_create.html'
-
-    def form_valid(self, form):
-        # ログインしているユーザーをオーガナイザーとして設定
-        form.instance.organizer = self.request.user.organizer_profile
-        return super().form_valid(form)
+def create_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.organizer = request.user.organizer_profile  
+            event.save()
+            return redirect(to='/events/')
+    else:
+        form = EventForm()
+    return render(request, 'events/event_create.html', {'form': form})
 
 
-class EventUpdate(UpdateView):
-    model = Event
-    fields = ['name', 'date', 'location', 'description', 'image', 'status', 'is_finished']
-    success_url = '/events/list'
-    template_name = 'events/event_update.html'
+def update_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('event_detail', pk=event.pk)
+    else:
+        form = EventForm(instance=event)
+    return render(request, 'events/event_update.html', {'form': form})
 
 
-class EventDelete(DeleteView):
-    model = Event
-    success_url = '/events/list'
+def delete_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == 'POST':
+        event.delete()
+        return redirect(to='/events/')
+    return render(request, 'events/event_confirm_delete.html', {'event': event})
 
 
 # 出店者からイベント申請リクエスト
