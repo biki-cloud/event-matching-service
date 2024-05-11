@@ -110,14 +110,21 @@ def request_application(request, event_pk):
         return redirect('event_detail', event.pk)
     return render(request, 'events/event_apply_create.html', {'form': form, 'event': event})
 
-# イベント申請リクエストを承認
+# イベント主催者がイベント申請リクエストを確認するページを返す
 @login_required
 def approve_application(request, application_id):
     application = get_object_or_404(EventApplication, id=application_id)
-    if request.user != application.event.organizer.user:
-        return HttpResponseForbidden()
-    application.is_approved = True
-    application.event.vendors.add(application.vendor)
-    application.save()
-    messages.success(request, 'The application has been approved.')
-    return redirect('event_detail', application.event.pk)
+    
+    if request.method == 'POST':
+        if 'approve' in request.POST:
+            application.is_approved = True
+            application.event.vendors.add(application.vendor)
+            application.save()
+            messages.success(request, 'The application has been approved.')
+        elif 'reject' in request.POST:
+            application.delete()
+            messages.success(request, 'The application has been rejected.')
+        return redirect('event_detail', application.event.pk)
+    
+    return render(request, 'events/event_apply_detail.html', {'application': application})
+

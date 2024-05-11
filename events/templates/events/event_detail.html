@@ -2,6 +2,13 @@
 
 {% block content %}
 
+{% if messages %}
+	<ul class="messages_ul">
+		{% for message in messages %}
+			<li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</li>
+		{% endfor %}
+	</ul>
+{% endif %}
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
@@ -17,16 +24,14 @@
           <h5 class="card-subtitle mb-2 text-muted">場所: {{ event.location }}</h5>
           <p class="card-text">{{ event.description }}</p>
           <h5 class="card-subtitle mb-2 text-muted">イベント作成者: {{ event.organizer }}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">イベント参加者:</h5>
-          <ul>
-            {% for vendor in event.vendors.all %}
-              <li>{{ vendor }}</li>
-            {% endfor %}
           </ul>
           <h5 class="card-subtitle mb-2 text-muted">イベント参加申請中:</h5>
           <ul>
             {% for event_application in request_non_approved_applications.all %}
-              <li>{{ event_application.vendor }}</li>
+              <li>{{ event_application.vendor }} - </li>
+              {% if organizer_can_edit %}
+                <a href="{% url 'approve_application' event_application.id %}">承認/拒否</a>
+              {% endif %}
             {% endfor %}
           </ul>
           <h5 class="card-subtitle mb-2 text-muted">イベント参加確定:</h5>
