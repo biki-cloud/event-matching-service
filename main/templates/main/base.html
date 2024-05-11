@@ -133,6 +133,12 @@
           >
             {% if request.user.is_authenticated %}
               <li class="sidebar-item">
+                <a href="{% url 'profile'%}" class="sidebar-link">User Info</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="{% url 'profile_edit'%}" class="sidebar-link">Edit</a>
+              </li>
+              <li class="sidebar-item">
                 <a href="{% url 'logout'%}" class="sidebar-link">Logout</a>
               </li>
               
