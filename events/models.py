@@ -19,6 +19,14 @@ class Event(models.Model):
     # イベントに参加するベンダーを特定するための多対多の関係
     vendors = models.ManyToManyField(VendorProfile, blank=True, related_name="vendors")
     image = models.ImageField("プロフィール画像", upload_to='images/', blank=True, null=True)
+    # 既存のフィールドは省略
+    STATUS_CHOICES = (
+        ('draft', '下書き'),
+        ('published', '公開済み'),
+        ('deleted', '削除済み'),
+    )
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    is_finished = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

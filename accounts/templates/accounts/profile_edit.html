@@ -29,10 +29,10 @@
 
     // ロールに応じてフォームを表示する関数
     function showFormBasedOnRole(role) {
-      if (role === 'イベント主催者') {
+      if (role === 'organizer') {
         organizerForm.style.display = 'block';
         vendorForm.style.display = 'none';
-      } else if (role === 'イベント出店者') {
+      } else if (role === 'vendor') {
         organizerForm.style.display = 'none';
         vendorForm.style.display = 'block';
       } else {

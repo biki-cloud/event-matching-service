@@ -25,10 +25,10 @@
     function showFormBasedOnRole() {
       console.log(roleSelect.value);
       var role = roleSelect.value;
-      if (role === 'イベント主催者') {
+      if (role === 'organizer') {
         organizerForm.style.display = 'block';
         vendorForm.style.display = 'none';
-      } else if (role === 'イベント出店者') {
+      } else if (role === 'vendor') {
         organizerForm.style.display = 'none';
         vendorForm.style.display = 'block';
       } else {

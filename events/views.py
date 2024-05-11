@@ -2,62 +2,83 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse
-from django.template import loader
-from django.urls import reverse_lazy
-
 from .models import Event
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Event
-from .models import VendorProfile
+from .models import Event, VendorProfile
+from .forms import EventForm
+import logging
+
+logger = logging.getLogger('myapp')
+
+def event_list(request):
+    if request.user.is_anonymous:
+        events = Event.objects.filter(status='published')
+    elif request.user.role == 'organizer':
+        events = Event.objects.all()
+    else:
+        events = Event.objects.filter(status='published')
+    return render(request, 'events/event_list.html', {'events': events})
+
+def event_detail(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    can_edit = False
+    can_delete = False
+    can_see_status = False
+    can_apply = False
+
+    if request.user.is_authenticated:
+        if request.user.role == 'organizer' and request.user.email == event.organizer.user.email:
+            can_edit = True
+            can_delete = True
+            can_see_status = True
+        elif request.user.role == 'vendor':
+            can_apply = True
+        if request.user.is_superuser:
+            can_edit = True
+            can_delete = True
+
+    context = {
+        'event': event,
+        'can_edit': can_edit,
+        'can_delete': can_delete,
+        'can_see_status': can_see_status,
+        'can_apply': can_apply
+    }
+    return render(request, 'events/event_detail.html', context)
+
+def create_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.organizer = request.user.organizer_profile  
+            event.save()
+            return redirect(to='/events/')
+    else:
+        form = EventForm()
+    return render(request, 'events/event_create.html', {'form': form})
 
 
-class EventList(ListView):
-    model = Event
-    context_object_name = 'events'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
-
-
-class EventDetail(DetailView):
-    model = Event
-    context_object_name = 'event'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
+def update_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES, instance=event)
+        if form.is_valid():
+            form.save()
+            return redirect('event_detail', pk=event.pk)
+    else:
+        form = EventForm(instance=event)
+    return render(request, 'events/event_update.html', {'form': form})
 
 
-class EventCreate(CreateView):
-    model = Event
-    fields = ['name', 'date', 'location', 'description', 'image']
-    success_url = '/events/list'
-    template_name = 'events/event_create.html'
-
-    def form_valid(self, form):
-        # ログインしているユーザーをオーガナイザーとして設定
-        form.instance.organizer = self.request.user.organizer_profile
-        return super().form_valid(form)
-
-
-class EventUpdate(UpdateView):
-    model = Event
-    fields = ['name', 'date', 'location', 'description', 'image']
-    success_url = '/events/list'
-    template_name = 'events/event_update.html'
-
-
-class EventDelete(DeleteView):
-    model = Event
-    success_url = '/events/list'
+def delete_event(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    if request.method == 'POST':
+        event.delete()
+        return redirect(to='/events/')
+    return render(request, 'events/event_confirm_delete.html', {'event': event})
 
 
 # 出店者からイベント申請リクエスト

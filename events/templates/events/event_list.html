@@ -12,9 +12,8 @@
     <tr>
       <th scope="col">イベント名</th>
       <th scope="col">詳細</th>
-      <th scope="col">作成者</th>
-      <th scope="col">編集</th>
-      <th scope="col">削除</th>
+      <th scope="col">日付</th>
+      <th scope="col">場所</th>
     </tr>
   </thead>
   <tbody>
@@ -22,14 +21,8 @@
     <tr>
       <td>{{ event.name }}</td>
       <td><a href="{% url 'event_detail' event.pk %}" class="btn btn-primary">詳細</a></td>
-      <td>{{ event.organizer }}</td>
-      {% if user.is_authenticated and user.email == event.organizer.user.email or user.is_superuser %}
-        <td><a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a></td>
-        <td><a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a></td>
-      {% else %}
-        <td></td>
-        <td></td>
-      {% endif %}
+      <td>{{ event.date }}</td>
+      <td>{{ event.location }}</td>
     </tr>
   {% endfor %}
   </tbody>
