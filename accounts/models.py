@@ -106,9 +106,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
     USER_ROLE_CHOICES = (
-        ("イベント主催者", "イベント主催者"),
-        ("イベント出店者", "イベント出店者"),
-        ("イベント参加者", "イベント参加者"),
+        ("organizer", "イベント主催者"),
+        ("vendor", "イベント出店者"),
+        ("customer", "イベント参加者"),
     )
     role = models.CharField("役割", max_length=250, choices=USER_ROLE_CHOICES, blank=True)
     image = models.ImageField("プロフィール画像", upload_to='images/', blank=True, null=True)

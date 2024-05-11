@@ -16,7 +16,7 @@ for entry in data['organizers']:
         username=entry['username'],
         email=entry['email'],
         password=entry['password'],
-        role='イベント主催者'
+        role='organizer'
     )
 
     # OrganizerProfileを作成

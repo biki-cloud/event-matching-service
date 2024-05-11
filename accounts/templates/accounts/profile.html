@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var organizerInfo = document.getElementById('organizer-info');
   var vendorInfo = document.getElementById('vendor-info');
 
-  if (role === 'イベント主催者') {
+  if (role === 'organizer') {
     organizerInfo.style.display = 'block';
-  } else if (role === 'イベント出店者') {
+  } else if (role === 'vendor') {
     vendorInfo.style.display = 'block';
   }
 });

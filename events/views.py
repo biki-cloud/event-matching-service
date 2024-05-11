@@ -15,7 +15,7 @@ logger = logging.getLogger('myapp')
 def event_list(request):
     if request.user.is_anonymous:
         events = Event.objects.filter(status='published')
-    elif request.user.role == 'イベント主催者':
+    elif request.user.role == 'organizer':
         events = Event.objects.all()
     else:
         events = Event.objects.filter(status='published')
@@ -29,11 +29,11 @@ def event_detail(request, pk):
     can_apply = False
 
     if request.user.is_authenticated:
-        if request.user.role == 'イベント主催者' and request.user.email == event.organizer.user.email:
+        if request.user.role == 'organizer' and request.user.email == event.organizer.user.email:
             can_edit = True
             can_delete = True
             can_see_status = True
-        elif request.user.role == 'イベント出店者':
+        elif request.user.role == 'vendor':
             can_apply = True
         if request.user.is_superuser:
             can_edit = True
