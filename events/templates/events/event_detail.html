@@ -23,12 +23,21 @@
               <li>{{ vendor }}</li>
             {% endfor %}
           </ul>
-          {% if show_status %}
-            <h5 class="card-subtitle mb-2 text-muted">ステータス: {{ event.status }}</h5>
+
+          {% if user.is_authenticated and user.role == 'イベント主催者' and user.email == event.organizer.user.email %}
+            <h5 class="card-subtitle mb-2 text-muted">イベントステータス: {{ event.status }}</h5>
           {% endif %}
+
           {% if user.is_authenticated and user.role == 'イベント出店者' %}
             <a href="{% url 'event_participation_request' event.pk %}" class="btn btn-primary">Apply to Event</a>
           {% endif %}
+
+          {% if user.is_authenticated and user.email == event.organizer.user.email or user.is_superuser %}
+            <a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a>
+            <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a>
+          {% endif %}
+
+
         </div>
       </div>
     </div>
