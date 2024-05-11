@@ -27,6 +27,22 @@ class Event(models.Model):
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     is_finished = models.BooleanField(default=False)
+    EVENT_TYPE_CHOICES = (
+        ('festival', '祭り'),
+        ('concert', 'コンサート'),
+        ('sports', 'スポーツ'),
+        ('other', 'その他'),
+    )
+    type = models.CharField(max_length=10, choices=EVENT_TYPE_CHOICES, default='festival')
 
     def __str__(self):
         return self.name
+
+class EventApplication(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='applications')
+    vendor = models.ForeignKey(VendorProfile, on_delete=models.CASCADE, related_name='applications')
+    message = models.TextField(default="default message")
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.vendor} application for {self.event}"
