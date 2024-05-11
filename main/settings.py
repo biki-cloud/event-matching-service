@@ -143,11 +143,19 @@ LOGGING = {
         },
     },
     'loggers': {
+        # djangoフレームワークのログ
         'django': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
         },
+        # SQLクエリのログ
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        # 自作アプリケーションのログ
         'myapp': {
             'handlers': ['console'],
             'level': 'DEBUG',

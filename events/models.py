@@ -30,3 +30,12 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+class EventApplication(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='applications')
+    vendor = models.ForeignKey(VendorProfile, on_delete=models.CASCADE, related_name='applications')
+    message = models.TextField(default="default message")
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.vendor} application for {self.event}"

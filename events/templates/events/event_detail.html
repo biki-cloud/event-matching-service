@@ -17,26 +17,26 @@
           <h5 class="card-subtitle mb-2 text-muted">場所: {{ event.location }}</h5>
           <p class="card-text">{{ event.description }}</p>
           <h5 class="card-subtitle mb-2 text-muted">イベント作成者: {{ event.organizer }}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">イベント参加者:</h5>
+          <h5 class="card-subtitle mb-2 text-muted">イベント参加確定者:</h5>
           <ul>
             {% for vendor in event.vendors.all %}
               <li>{{ vendor }}</li>
             {% endfor %}
           </ul>
 
-          {% if can_see_status %}
+          {% if organizer_can_see_status %}
             <h5 class="card-subtitle mb-2 text-muted">イベントステータス: {{ event.status }}</h5>
           {% endif %}
 
-          {% if can_apply %}
-            <a href="{% url 'event_participation_request' event.pk %}" class="btn btn-primary">Apply to Event</a>
+          {% if vendor_can_apply %}
+            <a href="{% url 'request_application' event.pk %}" class="btn btn-warning">イベント参加リクエスト</a>
           {% endif %}
 
-          {% if can_edit %}
+          {% if organizer_can_edit %}
             <a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a>
           {% endif %}
 
-          {% if can_delete %}
+          {% if organizer_can_delete %}
             <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a>
           {% endif %}
 
