@@ -32,6 +32,8 @@ def event_detail(request, pk):
     organizer_can_delete = False
     organizer_can_see_status = False
     vendor_can_apply = False
+    request_non_approved_applications = EventApplication.objects.filter(is_approved=False)
+    request_approved_applications = EventApplication.objects.filter(is_approved=True)
 
     if request.user.is_authenticated:
         if request.user.role == 'organizer' and request.user.email == event.organizer.user.email:
@@ -50,7 +52,9 @@ def event_detail(request, pk):
         'organizer_can_delete': organizer_can_delete,
         'organizer_can_see_status': organizer_can_see_status,
         'vendor_can_apply': vendor_can_apply,
-        'event_application_form': EventApplicationForm()
+        'event_application_form': EventApplicationForm(),
+        'request_non_approved_applications': request_non_approved_applications,
+        'request_approved_applications': request_approved_applications,
     }
     return render(request, 'events/event_detail.html', context)
 
@@ -94,13 +98,17 @@ def request_application(request, event_pk):
     vendor_profile = get_object_or_404(VendorProfile, user=request.user)
     form = EventApplicationForm(request.POST or None)
     if form.is_valid():
+        # ２重申請リクエストが起きないようにする
+        if event.applications.filter(vendor=vendor_profile).exists():
+            messages.error(request, 'You have already applied for this event.')
+            return redirect('event_detail', event.pk)
         application = form.save(commit=False)
         application.event = event
         application.vendor = vendor_profile
         application.save()
         messages.success(request, 'Your application has been submitted for review.')
         return redirect('event_detail', event.pk)
-    return render(request, 'events/event_apply.html', {'form': form, 'event': event})
+    return render(request, 'events/event_apply_create.html', {'form': form, 'event': event})
 
 # イベント申請リクエストを承認
 @login_required

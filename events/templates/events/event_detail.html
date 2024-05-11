@@ -17,10 +17,22 @@
           <h5 class="card-subtitle mb-2 text-muted">場所: {{ event.location }}</h5>
           <p class="card-text">{{ event.description }}</p>
           <h5 class="card-subtitle mb-2 text-muted">イベント作成者: {{ event.organizer }}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">イベント参加確定者:</h5>
+          <h5 class="card-subtitle mb-2 text-muted">イベント参加者:</h5>
           <ul>
             {% for vendor in event.vendors.all %}
               <li>{{ vendor }}</li>
+            {% endfor %}
+          </ul>
+          <h5 class="card-subtitle mb-2 text-muted">イベント参加申請中:</h5>
+          <ul>
+            {% for event_application in request_non_approved_applications.all %}
+              <li>{{ event_application.vendor }}</li>
+            {% endfor %}
+          </ul>
+          <h5 class="card-subtitle mb-2 text-muted">イベント参加確定:</h5>
+          <ul>
+            {% for event_application in request_approved_applications.all %}
+              <li>{{ event_application.vendor }}</li>
             {% endfor %}
           </ul>
 
