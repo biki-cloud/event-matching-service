@@ -23,7 +23,30 @@ def event_list(request):
 
 def event_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
-    return render(request, 'events/event_detail.html', {'event': event})
+    can_edit = False
+    can_delete = False
+    can_see_status = False
+    can_apply = False
+
+    if request.user.is_authenticated:
+        if request.user.role == 'イベント主催者' and request.user.email == event.organizer.user.email:
+            can_edit = True
+            can_delete = True
+            can_see_status = True
+        elif request.user.role == 'イベント出店者':
+            can_apply = True
+        if request.user.is_superuser:
+            can_edit = True
+            can_delete = True
+
+    context = {
+        'event': event,
+        'can_edit': can_edit,
+        'can_delete': can_delete,
+        'can_see_status': can_see_status,
+        'can_apply': can_apply
+    }
+    return render(request, 'events/event_detail.html', context)
 
 def create_event(request):
     if request.method == 'POST':
