@@ -31,7 +31,7 @@
             {% for event_application in request_non_approved_applications.all %}
               <li>{{ event_application.vendor }} - </li>
               {% if organizer_can_edit %}
-                <a href="{% url 'approve_application' event_application.id %}">承認/拒否</a>
+                <a href="{% url 'check_application' event_application.id %}">承認/拒否</a>
               {% endif %}
             {% endfor %}
           </ul>

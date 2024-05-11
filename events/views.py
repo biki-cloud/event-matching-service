@@ -112,7 +112,7 @@ def request_application(request, event_pk):
 
 # イベント主催者がイベント申請リクエストを確認するページを返す
 @login_required
-def approve_application(request, application_id):
+def check_application(request, application_id):
     application = get_object_or_404(EventApplication, id=application_id)
     
     if request.method == 'POST':
