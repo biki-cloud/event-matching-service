@@ -100,13 +100,13 @@ def request_application(request, event_pk):
     if form.is_valid():
         # ２重申請リクエストが起きないようにする
         if event.applications.filter(vendor=vendor_profile).exists():
-            messages.error(request, 'You have already applied for this event.')
+            messages.error(request, 'あなたはすでにこのイベントに参加申請しています。')
             return redirect('event_detail', event.pk)
         application = form.save(commit=False)
         application.event = event
         application.vendor = vendor_profile
         application.save()
-        messages.success(request, 'Your application has been submitted for review.')
+        messages.success(request, '参加リクエストに成功しました。')
         return redirect('event_detail', event.pk)
     return render(request, 'events/event_apply_create.html', {'form': form, 'event': event})
 
@@ -120,10 +120,10 @@ def approve_application(request, application_id):
             application.is_approved = True
             application.event.vendors.add(application.vendor)
             application.save()
-            messages.success(request, 'The application has been approved.')
+            messages.success(request, '申請リクエストが承認されました。')
         elif 'reject' in request.POST:
             application.delete()
-            messages.success(request, 'The application has been rejected.')
+            messages.success(request, '申請リクエストが拒否されました。')
         return redirect('event_detail', application.event.pk)
     
     return render(request, 'events/event_apply_detail.html', {'application': application})

@@ -27,6 +27,13 @@ class Event(models.Model):
     )
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     is_finished = models.BooleanField(default=False)
+    EVENT_TYPE_CHOICES = (
+        ('festival', '祭り'),
+        ('concert', 'コンサート'),
+        ('sports', 'スポーツ'),
+        ('other', 'その他'),
+    )
+    type = models.CharField(max_length=10, choices=EVENT_TYPE_CHOICES, default='festival')
 
     def __str__(self):
         return self.name
