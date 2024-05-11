@@ -99,6 +99,7 @@ http://127.0.0.1:8000/admin
 - [EC2 amazon linux2 rootにスイッチする方法を検証してみた #AWS - Qiita](https://qiita.com/gama1234/items/23b8397d66a890771866)
 - [はじめてのDjango (7) 画像データの管理やページへの表示，アップロードの方法などについて知ろう #Python - Qiita](https://qiita.com/j54854/items/1f0560142e39d888251c)
 - [codzsword/sidebar-bootstrap](https://github.com/codzsword/sidebar-bootstrap/tree/main)
+- [Explore and Download 8400+ Essential SVG Icons - Line icons](https://lineicons.com/icons)
 
 # TODO
 - 共有ボタン

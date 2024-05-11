@@ -29,15 +29,9 @@
         </div>
         <ul class="sidebar-nav">
           <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-user"></i>
-              <span>Profile</span>
-            </a>
-          </li>
-          <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-              <i class="lni lni-agenda"></i>
-              <span>Task</span>
+            <a href="{% url 'event_list'%}" class="sidebar-link">
+              <i class="lni lni-pizza"></i>
+              <span>Event</span>
             </a>
           </li>
           <li class="sidebar-item">
@@ -120,7 +114,40 @@
             </a>
           </li>
         </ul>
-        {% if request.user.is_authenticated %}
+        <li class="sidebar-item">
+          <a
+            href="#"
+            class="sidebar-link collapsed has-dropdown"
+            data-bs-toggle="collapse"
+            data-bs-target="#auth"
+            aria-expanded="false"
+            aria-controls="auth"
+          >
+            <i class="lni lni-protection"></i>
+            <span>Profile</span>
+          </a>
+          <ul
+            id="auth"
+            class="sidebar-dropdown list-unstyled collapse"
+            data-bs-parent="#sidebar"
+          >
+            {% if request.user.is_authenticated %}
+              <li class="sidebar-item">
+                <a href="{% url 'logout'%}" class="sidebar-link">Logout</a>
+              </li>
+              
+            {% else %}
+              <li class="sidebar-item">
+                <a href="{% url 'signup' %}" class="sidebar-link">Register</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="{% url 'login' %}?next={{ request.path }}" class="sidebar-link">Login</a>
+              </li>
+              
+            {% endif %}
+          </ul>
+        </li>
+        <!-- {% if request.user.is_authenticated %}
           <div class="sidebar-footer">
             <a href="{% url 'logout'%}" class="sidebar-link">
               <i class="lni lni-exit"></i>
@@ -140,7 +167,7 @@
               <span>Signup</span>
             </a>
           </div>
-        {% endif %}
+        {% endif %} -->
         
       </aside>
       <div class="main p-3">
