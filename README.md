@@ -104,3 +104,5 @@ http://127.0.0.1:8000/admin
 # TODO
 - 共有ボタン
 - リファクタリング
+- organizer -> vendorのプロフィール画面を作成, vendor -> organizer
+  - 今はurlパスでorganizerやvendorのアカウントを表示するようにしていない。ので修正する必要がある？
