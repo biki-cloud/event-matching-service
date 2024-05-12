@@ -18,7 +18,7 @@ import logging
 logger = logging.getLogger('myapp')
 
 def event_list(request):
-    if request.user.is_anonymous or request.user.role == 'customer' or request.user.role == 'イベント出店者':
+    if request.user.is_anonymous or request.user.role == 'customer' or request.user.role == 'vendor':
         events = Event.objects.filter(status='published')
     
     elif request.user.role == 'organizer':
@@ -43,7 +43,7 @@ def event_detail(request, pk):
             organizer_can_edit = True
             organizer_can_delete = True
             organizer_can_see_status = True
-        elif request.user.role == 'イベント出店者' and not event.vendors.filter(user=request.user).exists():
+        elif request.user.role == 'vendor' and not event.vendors.filter(user=request.user).exists():
             vendor_can_apply = True
         if request.user.is_superuser:
             organizer_can_edit = True
