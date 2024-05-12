@@ -34,7 +34,7 @@
               <span>Event</span>
             </a>
           </li>
-          <li class="sidebar-item">
+          <!-- <li class="sidebar-item">
             <a
               href="#"
               class="sidebar-link collapsed has-dropdown"
@@ -87,7 +87,7 @@
               <i class="lni lni-cog"></i>
               <span>Setting</span>
             </a>
-          </li>
+          </li> -->
         </ul>
         <li class="sidebar-item">
           <a
@@ -99,7 +99,11 @@
             aria-controls="auth"
           >
             <i class="lni lni-user"></i>
-            <span>{{ request.user }}</span>
+            {% if request.user.is_authenticated %}
+              <span>{{ request.user }}</span>
+            {% else %}
+              <span>No login</span>
+            {% endif %}
           </a>
           <ul
             id="auth"
