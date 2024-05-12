@@ -78,6 +78,26 @@ $ source .env
 $ ./db_reset.sh
 ```
 
+#### EC2インスタンスで起動
+```bash
+$ cd miccle-django-app
+$ git stash -u
+$ git pull origin main
+$ docker-compose -f docker-compose-local.yaml down
+$ docker-compose -f docker-compose-local.yaml up --build
+$ docker exec -it miccle bash
+# 正常に実行することを確認
+$ ./reset_db.sh
+# コンテナを抜ける
+$ exit
+# 正常に起動することを確認
+$ docker-compose -f docker-compose-local.yaml up 
+# バックグラウンドで起動させておく
+$ docker-compose -f docker-compose-local.yaml up -d
+# ec2を抜ける
+$ exit
+```
+
 ### ブラウザアクセス
 
 #### ホーム画面
