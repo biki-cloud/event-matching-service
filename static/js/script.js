@@ -1,4 +1,4 @@
-console.log("xxxx");
+console.log("root script.js loaded");
 
 document.addEventListener('DOMContentLoaded', function() {
   const sidebar = document.querySelector('#sidebar');

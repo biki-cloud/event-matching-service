@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static 'events/css/style.css' %}" />
+</head>
  <!-- ログインしている場合 -->
   {% if user.is_authenticated %}
     <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
@@ -29,5 +33,7 @@
   {% endfor %}
   </tbody>
 </table>
+
+<script src="{% static 'events/js/script.js' %}"></script>
 
 {% endblock %}
