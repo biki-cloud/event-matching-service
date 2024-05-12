@@ -136,6 +136,13 @@
       </aside>
       <div class="main p-3">
         <div class="text-center">
+          {% if messages %}
+            <ul class="messages_ul">
+              {% for message in messages %}
+                <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
           {% block content %}
           {% endblock %}
         </div>
