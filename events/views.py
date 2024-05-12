@@ -35,8 +35,8 @@ def event_detail(request, pk):
     organizer_can_delete = False
     organizer_can_see_status = False
     vendor_can_apply = False
-    request_non_approved_applications = EventApplication.objects.filter(is_approved=False)
-    request_approved_applications = EventApplication.objects.filter(is_approved=True)
+    request_non_approved_applications = EventApplication.objects.filter(is_approved=False, event=event)
+    request_approved_applications = EventApplication.objects.filter(is_approved=True, event=event)
 
     if request.user.is_authenticated:
         if request.user.role == 'organizer' and request.user.email == event.organizer.user.email:
