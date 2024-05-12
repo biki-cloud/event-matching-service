@@ -37,7 +37,11 @@
           </ul>
 
           {% if organizer_can_see_status %}
-            <h5 class="card-subtitle mb-2 text-muted">イベントステータス: {{ event.status }}</h5>
+            {% if event.status == 'draft' %}
+              <h5 class="card-subtitle mb-2 text-muted">イベントステータス: 下書き</h5>
+            {% elif event.status == 'published' %}
+              <h5 class="card-subtitle mb-2 text-muted">イベントステータス: 公開済み</h5>
+            {% endif %}
           {% endif %}
 
           {% if vendor_can_apply %}
