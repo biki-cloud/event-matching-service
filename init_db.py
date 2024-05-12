@@ -43,7 +43,7 @@ for entry in data['vendors']:
         username=entry['username'],
         email=entry['email'],
         password=entry['password'],
-        role='イベント出店者'
+        role='vendor'
     )
     vendor_profile = VendorProfile.objects.create(
         user=user,

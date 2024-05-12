@@ -98,8 +98,12 @@ http://127.0.0.1:8000/admin
 - [【ソースコード付き】Django SNS アプリの作り方｜Shogo Saito](https://note.com/saito_pythonista/n/n6550f5c2a07b)
 - [EC2 amazon linux2 rootにスイッチする方法を検証してみた #AWS - Qiita](https://qiita.com/gama1234/items/23b8397d66a890771866)
 - [はじめてのDjango (7) 画像データの管理やページへの表示，アップロードの方法などについて知ろう #Python - Qiita](https://qiita.com/j54854/items/1f0560142e39d888251c)
+- [codzsword/sidebar-bootstrap](https://github.com/codzsword/sidebar-bootstrap/tree/main)
+- [Explore and Download 8400+ Essential SVG Icons - Line icons](https://lineicons.com/icons)
 
 # TODO
+- organizer -> vendorのプロフィール画面を作成, vendor -> organizer
+  - 今はurlパスでorganizerやvendorのアカウントを表示するようにしていない。ので修正する必要がある？
+  - アカウント設定での内容を表示させるか？自己紹介ページみたいなのを作るか
+- vendorやorganizerを検索するための機能は作った方が良さそう
 - 共有ボタン
-- リファクタリング
-- サイドバー

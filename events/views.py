@@ -18,10 +18,13 @@ import logging
 logger = logging.getLogger('myapp')
 
 def event_list(request):
-    if request.user.is_anonymous:
+    if request.user.is_anonymous or request.user.role == 'customer' or request.user.role == 'vendor':
         events = Event.objects.filter(status='published')
+    
     elif request.user.role == 'organizer':
-        events = Event.objects.all()
+        # 自分(organizer)が作成したイベントは全て表示
+        # 他人のorganizerが作成したイベントでpublishedのものだけを表示
+        events = Event.objects.filter(organizer=request.user.organizer_profile) | Event.objects.filter(status='published')
     else:
         events = Event.objects.filter(status='published')
     return render(request, 'events/event_list.html', {'events': events})
@@ -32,15 +35,21 @@ def event_detail(request, pk):
     organizer_can_delete = False
     organizer_can_see_status = False
     vendor_can_apply = False
-    request_non_approved_applications = EventApplication.objects.filter(is_approved=False)
-    request_approved_applications = EventApplication.objects.filter(is_approved=True)
+    request_non_approved_applications = EventApplication.objects.filter(is_approved=False, event=event)
+    request_approved_applications = EventApplication.objects.filter(is_approved=True, event=event)
 
     if request.user.is_authenticated:
         if request.user.role == 'organizer' and request.user.email == event.organizer.user.email:
             organizer_can_edit = True
             organizer_can_delete = True
             organizer_can_see_status = True
-        elif request.user.role == 'イベント出店者' and not event.vendors.filter(user=request.user).exists():
+        elif (
+            request.user.role == 'vendor' and 
+            # すでに申請していないことを確認
+            request_non_approved_applications.filter(vendor=request.user.vendor_profile).exists() == False and
+            # すでにイベントに参加確定していないことを確認
+            request_approved_applications.filter(vendor=request.user.vendor_profile).exists() == False
+        ):
             vendor_can_apply = True
         if request.user.is_superuser:
             organizer_can_edit = True
@@ -112,7 +121,7 @@ def request_application(request, event_pk):
 
 # イベント主催者がイベント申請リクエストを確認するページを返す
 @login_required
-def approve_application(request, application_id):
+def check_application(request, application_id):
     application = get_object_or_404(EventApplication, id=application_id)
     
     if request.method == 'POST':
