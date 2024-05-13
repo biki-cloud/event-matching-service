@@ -122,8 +122,8 @@ http://127.0.0.1:8000/admin
 - [Explore and Download 8400+ Essential SVG Icons - Line icons](https://lineicons.com/icons)
 
 # TODO
-- organizer -> vendorのプロフィール画面を作成, vendor -> organizer
-  - 今はurlパスでorganizerやvendorのアカウントを表示するようにしていない。ので修正する必要がある？
-  - アカウント設定での内容を表示させるか？自己紹介ページみたいなのを作るか
+- organizer, vendorの自己紹介画面を作成(アカウントのprofileとは別)
 - vendorやorganizerを検索するための機能は作った方が良さそう
+- ソーシャルログイン機能
+- パスワードリセットでmail送るとかの認証機能
 - 共有ボタン
