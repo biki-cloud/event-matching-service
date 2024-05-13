@@ -110,27 +110,10 @@
             class="sidebar-dropdown list-unstyled collapse"
             data-bs-parent="#sidebar"
           >
-            {% if request.user.is_authenticated %}
-              <li class="sidebar-item">
-                <a href="{% url 'profile'%}" class="sidebar-link">User Info</a>
-              </li>
-              <li class="sidebar-item">
-                <a href="{% url 'profile_edit'%}" class="sidebar-link">Edit</a>
-              </li>
-              <li class="sidebar-item">
-                <a href="{% url 'logout'%}" class="sidebar-link">Logout</a>
-              </li>
-              
-            {% else %}
-              <li class="sidebar-item">
-                <a href="{% url 'signup' %}" class="sidebar-link">Register</a>
-              </li>
-              <li class="sidebar-item">
-                <a href="{% url 'login' %}?next={{ request.path }}" class="sidebar-link">Login</a>
-              </li>
-              
-            {% endif %}
           </ul>
+          <a href="/accounts/logout" class="sidebar-link">
+            <i class="lni lni-exit"></i>
+            <span>Logout</span>
         </li>
         
       </aside>

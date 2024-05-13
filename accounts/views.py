@@ -49,27 +49,46 @@ def signup(request):
     return render(request, 'accounts/signup.html', context)
 
 
-def user_login(request):
-    if request.method == 'POST':
-        next = request.POST.get('next')
-        form = LoginForm(request, data=request.POST)
+# def user_login(request):
+#     if request.method == 'POST':
+#         next = request.POST.get('next')
+#         form = LoginForm(request, data=request.POST)
 
-        if form.is_valid():
-            user = form.get_user()
+#         if form.is_valid():
+#             user = form.get_user()
 
-            if user:
-                login(request, user)
-                return redirect(to='/accounts/profile/')
+#             if user:
+#                 login(request, user)
+#                 return redirect(to='/accounts/profile/')
 
-    else:
-        form = LoginForm()
+#     else:
+#         form = LoginForm()
 
-    param = {
-        'form': form,
-    }
+#     param = {
+#         'form': form,
+#     }
 
-    return render(request, 'accounts/login.html', param)
+#     return render(request, 'accounts/login.html', param)
 
+from allauth.account.views import LoginView
+from .forms import OrganizerProfileForm
+
+import logging
+logger = logging.getLogger('django')
+
+class CustomLoginView(LoginView):
+    template_name = 'account/login.html'
+    logger.info('CustomLoginView.get_context_data()')
+    logger.debug('CustomLoginView.get_context_data()')
+
+    def get_context_data(self, **kwargs):
+        logger.debug('CustomLoginView.get_context_data()')
+        logger.info('CustomLoginView.get_context_data()')
+        context = super().get_context_data(**kwargs)
+        context['organizer_form'] = OrganizerProfileForm()
+        context['vendor_form'] = VendorProfileForm()
+        context['test'] = 'xxxx'
+        return context
 
 @login_required
 def profile(request):
