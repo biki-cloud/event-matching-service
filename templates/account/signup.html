@@ -1,0 +1,7 @@
+<p>カスタムsignupページ</p>
+<form method="post" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  </div>
+  <button type="submit">ログイン</button>
+</form>

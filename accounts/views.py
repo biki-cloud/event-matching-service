@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from .forms import (
-    SignupForm,
     LoginForm,
     OrganizerProfileForm,
     VendorProfileForm,
@@ -9,8 +8,7 @@ from .forms import (
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import OrganizerProfile, VendorProfile
-from allauth.account.views import LoginView
-from .forms import OrganizerProfileForm
+from allauth.account.views import LoginView, SignupView
 
 import logging
 
@@ -20,38 +18,23 @@ def accounts_home(request):
     return render(request, 'accounts/accounts_home.html')
 
 
-def signup(request):
-    form = SignupForm(request.POST or None, request.FILES or None)
-    organizer_profile_form = OrganizerProfileForm(request.POST or None)
-    vendor_profile_form = VendorProfileForm(request.POST or None)
+class CustomSignupView(SignupView):
+    template_name = 'account/signup.html'
 
-    if request.method == "POST" and form.is_valid():
-        # Userモデル処理
-        user = form.save(commit=False)
-        user.save()
-
+    def form_valid(self, form):
+        user = form.save(self.request)
         # organizerモデルがフォームで入力されていれば保存
+        organizer_profile_form = OrganizerProfileForm(self.request.POST, instance=user.organizer_profile)
         if organizer_profile_form.is_valid():
-            organizer_profile = organizer_profile_form.save(commit=False)
-            organizer_profile.user = user
-            organizer_profile.save()
-
+            organizer_profile_form.save()
+        
         # vendorモデルがフォームで入力されていれば保存
+        vendor_profile_form = VendorProfileForm(self.request.POST, instance=user.vendor_profile)
         if vendor_profile_form.is_valid():
-            vendor_profile = vendor_profile_form.save(commit=False)
-            vendor_profile.user = user
-            vendor_profile.save()
+            vendor_profile_form.save()
 
-        login(request, user)
+        return super().form_valid(form)
 
-        return redirect(to='/accounts/profile/')
-
-    context = {
-        "form": form,
-        "organizer_form": organizer_profile_form,
-        "vendor_form": vendor_profile_form,
-    }
-    return render(request, 'accounts/signup.html', context)
 
 class CustomLoginView(LoginView):
     template_name = 'account/login.html'
