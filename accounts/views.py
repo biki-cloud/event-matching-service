@@ -74,16 +74,12 @@ from allauth.account.views import LoginView
 from .forms import OrganizerProfileForm
 
 import logging
-logger = logging.getLogger('django')
+logger = logging.getLogger('myapp')
 
 class CustomLoginView(LoginView):
     template_name = 'account/login.html'
-    logger.info('CustomLoginView.get_context_data()')
-    logger.debug('CustomLoginView.get_context_data()')
 
     def get_context_data(self, **kwargs):
-        logger.debug('CustomLoginView.get_context_data()')
-        logger.info('CustomLoginView.get_context_data()')
         context = super().get_context_data(**kwargs)
         context['organizer_form'] = OrganizerProfileForm()
         context['vendor_form'] = VendorProfileForm()
