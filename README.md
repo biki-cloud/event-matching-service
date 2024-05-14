@@ -123,6 +123,7 @@ http://127.0.0.1:8000/admin
 
 # TODO
 - CustomSignupViewのform_valid関数がオーバーライドできない。ログにないので呼び出されていないっぽい。
+  - https://zenn.dev/kei_h74/articles/31faae563f7354
 - organizer, vendorの自己紹介画面を作成(アカウントのprofileとは別)
 - vendorやorganizerを検索するための機能は作った方が良さそう
 - ソーシャルログイン機能
