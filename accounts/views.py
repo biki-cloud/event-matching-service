@@ -9,7 +9,12 @@ from .forms import (
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from .models import OrganizerProfile, VendorProfile
+from allauth.account.views import LoginView
+from .forms import OrganizerProfileForm
 
+import logging
+
+logger = logging.getLogger('myapp')
 
 def accounts_home(request):
     return render(request, 'accounts/accounts_home.html')
@@ -47,34 +52,6 @@ def signup(request):
         "vendor_form": vendor_profile_form,
     }
     return render(request, 'accounts/signup.html', context)
-
-
-# def user_login(request):
-#     if request.method == 'POST':
-#         next = request.POST.get('next')
-#         form = LoginForm(request, data=request.POST)
-
-#         if form.is_valid():
-#             user = form.get_user()
-
-#             if user:
-#                 login(request, user)
-#                 return redirect(to='/accounts/profile/')
-
-#     else:
-#         form = LoginForm()
-
-#     param = {
-#         'form': form,
-#     }
-
-#     return render(request, 'accounts/login.html', param)
-
-from allauth.account.views import LoginView
-from .forms import OrganizerProfileForm
-
-import logging
-logger = logging.getLogger('myapp')
 
 class CustomLoginView(LoginView):
     template_name = 'account/login.html'
