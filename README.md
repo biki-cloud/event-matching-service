@@ -122,6 +122,7 @@ http://127.0.0.1:8000/admin
 - [Explore and Download 8400+ Essential SVG Icons - Line icons](https://lineicons.com/icons)
 
 # TODO
+- CustomSignupViewのform_valid関数がオーバーライドできない。ログにないので呼び出されていないっぽい。
 - organizer, vendorの自己紹介画面を作成(アカウントのprofileとは別)
 - vendorやorganizerを検索するための機能は作った方が良さそう
 - ソーシャルログイン機能

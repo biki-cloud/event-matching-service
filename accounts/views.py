@@ -20,26 +20,39 @@ def accounts_home(request):
 
 class CustomSignupView(SignupView):
     template_name = 'account/signup.html'
+    logger.info('CustomSignupView')
 
     def form_valid(self, form):
         user = form.save(self.request)
         # organizerモデルがフォームで入力されていれば保存
         organizer_profile_form = OrganizerProfileForm(self.request.POST, instance=user.organizer_profile)
         if organizer_profile_form.is_valid():
+            logger.info('organizer_profile_form.is_valid()')
             organizer_profile_form.save()
         
         # vendorモデルがフォームで入力されていれば保存
         vendor_profile_form = VendorProfileForm(self.request.POST, instance=user.vendor_profile)
         if vendor_profile_form.is_valid():
+            logger.info('organizer_profile_form.is_valid()')
             vendor_profile_form.save()
+        
+        logger.info('user.save()')
 
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        logger.info('CustomSignUpView get_context_data')
+        context = super().get_context_data(**kwargs)
+        context['organizer_form'] = OrganizerProfileForm()
+        context['vendor_form'] = VendorProfileForm()
+        return context
 
 
 class CustomLoginView(LoginView):
     template_name = 'account/login.html'
 
     def get_context_data(self, **kwargs):
+        logger.info('CustomLoginView get_context_data')
         context = super().get_context_data(**kwargs)
         context['organizer_form'] = OrganizerProfileForm()
         context['vendor_form'] = VendorProfileForm()
