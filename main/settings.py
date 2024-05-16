@@ -198,3 +198,13 @@ ACCOUNT_USERNAME_REQUIRED = False
 # ユーザ登録時に確認メールを送信するか(none=送信しない, mandatory=送信する)
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_EMAIL_REQUIRED = True   # ユーザ登録にメルアド必須にする
+
+#passwordの入力を一回に
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+#signupformを指定
+ACCOUNT_FORMS = {
+    'signup' : 'accounts.forms.CustomSignupForm',
+}
+#signupformからの情報をcustomusermodelに保存するのに必要
+ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'

@@ -19,17 +19,10 @@ from django.urls import path, include
 from .views import home
 from .settings import MEDIA_ROOT, MEDIA_URL
 from django.conf.urls.static import static
-from accounts.views import (
-    CustomLoginView,
-    CustomSignupView
-)
 
 urlpatterns = [
                   path('', home, name='home'),
                   path('admin/', admin.site.urls),
                   path("events/", include("events.urls")),
-                  # allauthのカスタムビューはaccounts/よりも前に書く必要がある。
-                  path('accounts/login/', CustomLoginView.as_view(), name='custom_login'),
-                  path('accounts/signup/', CustomSignupView.as_view(), name='custom_signup'),
                   path("accounts/", include("allauth.urls")),
               ] + static(MEDIA_URL, document_root=MEDIA_ROOT)
