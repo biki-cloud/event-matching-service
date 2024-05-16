@@ -116,6 +116,8 @@ TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -128,8 +130,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTH_USER_MODEL = 'accounts.CustomUser'
 
 CSRF_TRUSTED_ORIGINS = [
     os.environ.get('HOST_NAME')
@@ -186,6 +186,9 @@ AUTHENTICATION_BACKENDS = [
 # sitesフレームワーク用のサイトID
 SITE_ID = 1
 
+# ユーザモデルをカスタマイズしたモデルを指定
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
 # ログイン・ログアウト時のリダイレクト先
 LOGIN_REDIRECT_URL = '/events/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
@@ -206,5 +209,6 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_FORMS = {
     'signup' : 'accounts.forms.CustomSignupForm',
 }
+
 #signupformからの情報をcustomusermodelに保存するのに必要
 ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
