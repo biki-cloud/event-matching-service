@@ -20,11 +20,11 @@ logger = logging.getLogger('myapp')
 def event_list(request):
     if request.user.is_anonymous or request.user.role == 'customer' or request.user.role == 'vendor':
         events = Event.objects.filter(status='published')
-    
     elif request.user.role == 'organizer':
-        # 自分(organizer)が作成したイベントは全て表示
-        # 他人のorganizerが作成したイベントでpublishedのものだけを表示
-        events = Event.objects.filter(organizer=request.user.organizer_profile) | Event.objects.filter(status='published')
+        if hasattr(request.user, 'organizer_profile'):
+            events = Event.objects.filter(organizer=request.user.organizer_profile) | Event.objects.filter(status='published')
+        else:
+            events = Event.objects.filter(status='published')
     else:
         events = Event.objects.filter(status='published')
     return render(request, 'events/event_list.html', {'events': events})

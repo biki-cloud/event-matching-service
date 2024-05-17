@@ -1,7 +1,14 @@
-<p>カスタムsignupページ</p>
-<form method="post" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  </div>
-  <button type="submit">ログイン</button>
+<!doctype html>
+{% extends "base.html" %}
+
+{% block title %}ユーザー登録{% endblock %}
+
+{% block content %}
+<h2>ユーザー登録</h2>
+<form method="post">
+    {% csrf_token %}
+    <p>ユーザ情報</p>
+    {{ form.as_p }}
+    <p><a href="{% url 'account_login' %}"><button type="submit">ユーザー登録</button></a></p>
 </form>
+{% endblock %}

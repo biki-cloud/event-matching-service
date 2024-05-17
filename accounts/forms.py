@@ -1,6 +1,9 @@
 from allauth.account.forms import SignupForm
 from django import forms
 from .models import CustomUser
+import logging
+
+logger = logging.getLogger('myapp')
 
 class CustomSignupForm(SignupForm):
     role = forms.ChoiceField(choices=CustomUser.ROLE_CHOICES)
