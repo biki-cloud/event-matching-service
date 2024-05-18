@@ -3,6 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('create', views.OrganizerCreateView.as_view(), name="organizer_create"),
+    path('update/<int:pk>', views.OrganizerUpdateView.as_view(), name='organizer_update'),
     path('detail/<int:pk>', views.OrganizerDetailView.as_view(), name="organizer_detail"),
 ]

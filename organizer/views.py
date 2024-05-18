@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.urls import reverse
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.contrib import messages
 
 from .models import OrganizerProfile
@@ -11,25 +12,14 @@ class OrganizerDetailView(DetailView):
     template_name = 'organizer/organizer_detail.html'
     context_object_name = 'organizer'
 
-class OrganizerCreateView(CreateView):
+class OrganizerUpdateView(UpdateView):
     model = OrganizerProfile
-    template_name = 'organizer/organizer_create.html'
     form_class = OrganizerCreateForm
-    success_url = '/events/list'
+    template_name = 'organizer/organizer_update.html'
 
-    # ログインしているユーザーを context に追加
-    # contextに値を入れることで、テンプレートに値を渡し、テンプレートで表示することができる
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['user'] = self.request.user
-        return context
+    def get_success_url(self):
+        return reverse('organizer_detail', kwargs={'pk': self.object.pk})
 
-    # フォームのバリデーションが成功した場合に呼ばれるメソッド
-    # ここでフォームの内容を保存する
     def form_valid(self, form):
-        # if self.request.user.organizer_profile.exists() is False:
-            # ログインしているユーザーが OrganizerProfile を持っていない場合
-            # OrganizerProfile の user にログインしているユーザーを設定し保存
-        form.instance.user = self.request.user  # ログインしているユーザーを OrganizerProfile の user に設定
-        messages.success(self.request, '主催者情報を登録しました')
+        messages.success(self.request, '主催者情報が更新されました。')
         return super().form_valid(form)

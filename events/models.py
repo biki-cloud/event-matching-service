@@ -4,8 +4,8 @@ from django.db import models
 
 from django.db import models
 
-from accounts.models import VendorProfile
 from organizer.models import OrganizerProfile
+from vendor.models import VendorProfile
 
 
 class Event(models.Model):

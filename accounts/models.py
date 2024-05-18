@@ -19,12 +19,8 @@ class CustomUser(AbstractUser):
     def organizer(self):
         # ログインしているユーザを外部キーとして持つorganizer profileが存在する場合、そのorganizer profileを返す
         return self.organizer_profile if hasattr(self, 'organizer_profile') else None
-
-
-class VendorProfile(models.Model):
-    """CustomUserに紐ずくイベント出店者のプロフィールモデル"""
-    vendor_name = models.CharField("主催者名", max_length=255, blank=True)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="vendor_profile")
-
-    def __str__(self):
-        return self.user.email
+    
+    @property
+    def vendor(self):
+        # ログインしているユーザを外部キーとして持つvendor profileが存在する場合、そのvendor profileを返す
+        return self.vendor_profile if hasattr(self, 'vendor_profile') else None

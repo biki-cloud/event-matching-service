@@ -25,5 +25,6 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path("events/", include("events.urls")),
                   path("organizer/", include("organizer.urls")),
+                  path("vendor/", include("vendor.urls")),
                   path("accounts/", include("allauth.urls")),
               ] + static(MEDIA_URL, document_root=MEDIA_ROOT)

@@ -2,6 +2,7 @@ from allauth.account.forms import SignupForm
 from django import forms
 from .models import CustomUser
 from organizer.models import OrganizerProfile
+from vendor.models import VendorProfile
 import logging
 from django.contrib import messages
 
@@ -23,5 +24,9 @@ class CustomSignupForm(SignupForm):
         if user.role_type == 'organizer':
             organizer_profile = OrganizerProfile.objects.create(user=user)
             messages.success(request, 'イベント主催者として登録しました')
+        
+        if user.role_type == 'vendor':
+            vendor_profile = VendorProfile.objects.create(user=user)
+            messages.success(request, 'イベント出店者として登録しました')
 
         return user

@@ -1,7 +1,7 @@
 import json
 from django.contrib.auth import get_user_model
-from accounts.models import VendorProfile
 from organizer.models import OrganizerProfile
+from vendor.models import VendorProfile
 from events.models import Event
 
 # JSONファイルを読み込む
