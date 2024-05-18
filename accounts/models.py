@@ -13,21 +13,12 @@ class CustomUser(AbstractUser):
         ('customer', 'イベント参加者')
     )
 
-    role = models.CharField('アカウント種別', max_length=20, choices=ROLE_CHOICES)
+    role_type = models.CharField('アカウント種別', max_length=20, choices=ROLE_CHOICES)
 
-GENDER_CHOICES = (
-    ("女性", "女性"),
-    ("男性", "男性"),
-)
-
-class OrganizerProfile(models.Model):
-    """CustomUserに紐ずくイベント主催者のプロフィールモデル"""
-    phone = models.CharField("電話番号", max_length=255, blank=True)
-    gender = models.CharField("性別", max_length=2, choices=GENDER_CHOICES, blank=True)
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="organizer_profile")
-
-    def __str__(self):
-        return self.user.email
+    @property
+    def organizer(self):
+        # ログインしているユーザを外部キーとして持つorganizer profileが存在する場合、そのorganizer profileを返す
+        return self.organizer_profile if hasattr(self, 'organizer_profile') else None
 
 
 class VendorProfile(models.Model):

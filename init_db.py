@@ -1,6 +1,7 @@
 import json
 from django.contrib.auth import get_user_model
-from accounts.models import OrganizerProfile, VendorProfile
+from accounts.models import VendorProfile
+from organizer.models import OrganizerProfile
 from events.models import Event
 
 # JSONファイルを読み込む
@@ -16,7 +17,7 @@ for entry in data['organizers']:
         username=entry['username'],
         email=entry['email'],
         password=entry['password'],
-        role='organizer'
+        role_type='organizer'
     )
 
     # OrganizerProfileを作成
@@ -43,7 +44,7 @@ for entry in data['vendors']:
         username=entry['username'],
         email=entry['email'],
         password=entry['password'],
-        role='vendor'
+        role_type='vendor'
     )
     vendor_profile = VendorProfile.objects.create(
         user=user,
