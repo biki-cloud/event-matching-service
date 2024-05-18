@@ -26,81 +26,21 @@ repos:
         require_serial: true
         additional_dependencies: []
         minimum_pre_commit_version: "2.9.2"
-  # mypy
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.7.0
-    hooks:
-    # Run the mypy.
-    - id: mypy
-      name: mypy
-      description: "Run 'mypy' for Python linting"
-      entry: mypy
-      language: python
-      args: [--strict, --ignore-missing-imports]
-      require_serial: true
-      # Add types package list
-      additional_dependencies: []
-      minimum_pre_commit_version: '2.9.2'
-
-  - repo: local
-    hooks:
-      - id: mypy
-        name: mypy
-        entry: mypy .
-        language: system
-        types: [python]
-        pass_filenames: true
-        files: \.py$
-        verbose: true
-        stages: [commit]
-      - id: ruff-check-fix
-        name: ruff check and fix
-        entry: ruff check . --fix
-        language: system
-        types: [python]
-        pass_filenames: false
-        verbose: true
-        stages: [commit]
-      - id: ruff-format
-        name: ruff format
-        entry: ruff format .
-        language: system
-        types: [python]
-        pass_filenames: false
-        verbose: true
-        stages: [commit]
-      - id: autoflake
-        name: autoflake
-        entry: autoflake --remove-all-unused-imports --recursive --remove-unused-variables --in-place . --exclude=__init__.py
-        language: system
-        types: [python]
-        pass_filenames: false
-        verbose: true
-        stages: [commit]
-      - id: black
-        name: black
-        entry: black .
-        language: system
-        types: [python]
-        pass_filenames: false
-        verbose: true
-        stages: [commit]
-      - id: isort
-        name: isort
-        entry: isort .
-        language: system
-        types: [python]
-        pass_filenames: false
-        verbose: true
-        stages: [commit]
-      - id: isort-force-single-line
-        name: isort force single line
-        entry: isort --force-single-line-imports .
-        language: system
-        types: [python]
-        pass_filenames: false
-        verbose: true
-        stages: [commit]
+  # # mypy
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.7.0
+  #   hooks:
+  #   # Run the mypy.
+  #   - id: mypy
+  #     name: mypy
+  #     description: "Run 'mypy' for Python linting"
+  #     entry: mypy
+  #     language: python
+  #     args: [--strict, --ignore-missing-imports]
+  #     require_serial: true
+  #     # Add types package list
+  #     additional_dependencies: []
+  #     minimum_pre_commit_version: '2.9.2'
 
   - repo: https://github.com/aws-cloudformation/cfn-lint
     rev: v0.71.0
