@@ -1,4 +1,4 @@
-name: unittest
+name: 単体テスト
 
 on:
   push:
