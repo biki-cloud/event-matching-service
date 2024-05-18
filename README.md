@@ -141,6 +141,10 @@ $ pre-commit uninstall
 - [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
 - [Django Allauth: The complete django-allauth guide - DEV Community](https://dev.to/gajesh/the-complete-django-allauth-guide-la3)
   - [django-experiments/allauthdemo at master · gajeshbhat/django-experiments](https://github.com/gajeshbhat/django-experiments/tree/master/allauthdemo)
+
+### メール送信
+- [2024年最新版 - DjangoからGmailを送信 #Python - Qiita](https://qiita.com/OzWay_jon/items/cf16429cd7f64ff8670d)
+- [[Django] Gmailを送信する設定](https://zenn.dev/wtkn25/articles/django-gmail)
 - [Googleのアプリパスワード（App passwords）が見つからない時の対処法 #JavaScript - Qiita](https://qiita.com/morima/items/58c51f7a35af2ed80050)
 
 ## pre-commit

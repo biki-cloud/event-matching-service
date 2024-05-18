@@ -13,8 +13,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import certifi
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+# .envファイルを読み込む
+env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -216,3 +223,14 @@ ACCOUNT_FORMS = {
 
 # signupformからの情報をcustomusermodelに保存するのに必要
 ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
+
+
+# メール送信設定
+# 証明書のパスを指定
+os.environ["SSL_CERT_FILE"] = certifi.where()
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")

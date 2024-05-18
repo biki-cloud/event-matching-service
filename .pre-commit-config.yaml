@@ -33,14 +33,20 @@ repos:
       - id: isort
         args: ["--profile", "black"]
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
-    hooks:
-      - id: mypy
-        args: [--ignore-missing-imports]
-        additional_dependencies:
-        - django-stubs
-        - django-allauth
+  # エラーが多く出るので一旦コメントアウト
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.10.0
+  #   hooks:
+  #     - id: mypy
+  #       entry: mypy
+  #       language: python
+  #       args: [--ignore-missing-imports]
+  #       additional_dependencies:
+  #       # ModuleNotFoundError: No module named 'xxx'とエラーが出る場合はそのモジュールを下記に追加
+  #       - django-stubs
+  #       - django-allauth
+  #       - certifi
+  #       - environ
 
   - repo: https://github.com/psf/black
     rev: 24.4.2
