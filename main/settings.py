@@ -37,12 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    'django.contrib.sites', # allauthで必要
+    'allauth', # allauthで必要
+    'allauth.account', # allauthで必要
+    'allauth.socialaccount', # allauthで必要
     'events.apps.EventsConfig',
     'accounts.apps.AccountsConfig',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+    'organizer.apps.OrganizerConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,10 +127,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -175,7 +172,6 @@ LOGGING = {
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-    BASE_DIR / 'main/static',
     BASE_DIR / 'events/static',
 ]
 
