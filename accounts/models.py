@@ -13,8 +13,12 @@ class CustomUser(AbstractUser):
         ('customer', 'イベント参加者')
     )
 
-    role = models.CharField('アカウント種別', max_length=20, choices=ROLE_CHOICES)
+    role_type = models.CharField('アカウント種別', max_length=20, choices=ROLE_CHOICES)
 
+    @property
+    def organizer(self):
+        # ログインしているユーザを外部キーとして持つorganizer profileが存在する場合、そのorganizer profileを返す
+        return self.organizer_profile if hasattr(self, 'organizer_profile') else None
 
 
 class VendorProfile(models.Model):

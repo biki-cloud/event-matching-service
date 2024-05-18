@@ -2,6 +2,7 @@ from django.db import models
 
 from accounts.models import CustomUser
 
+
 GENDER_CHOICES = (
     ("女性", "女性"),
     ("男性", "男性"),

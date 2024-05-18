@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="{% static 'events/css/style.css' %}" />
 </head>
  <!-- ログインしている場合 -->
-  {% if user.is_authenticated and user.role == 'organizer' %}
+  {% if user.is_authenticated and user.role_type == 'organizer' %}
     <a href="{% url 'event_create' %}" class="btn btn-primary mb-3">新規作成</a>
   {% endif %}
 

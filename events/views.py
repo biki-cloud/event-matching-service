@@ -19,7 +19,7 @@ import logging
 logger = logging.getLogger('myapp')
 
 def event_list(request):
-    if request.user.is_anonymous or request.user.role == 'customer' or request.user.role == 'vendor':
+    if request.user.is_anonymous or request.user.role_type == 'customer' or request.user.role_type == 'vendor':
         events = Event.objects.filter(status='published')
     # TODO: あとで実装
     # elif request.user.role == 'organizer':
@@ -39,12 +39,12 @@ def event_detail(request, pk):
     request_approved_applications = EventApplication.objects.filter(is_approved=True, event=event)
 
     if request.user.is_authenticated:
-        if request.user.role == 'organizer' and request.user.email == event.organizer.user.email:
+        if request.user.role_type == 'organizer' and request.user.email == event.organizer.user.email:
             organizer_can_edit = True
             organizer_can_delete = True
             organizer_can_see_status = True
         elif (
-            request.user.role == 'vendor' and 
+            request.user.role_type == 'vendor' and 
             # すでに申請していないことを確認
             request_non_approved_applications.filter(vendor=request.user.vendor_profile).exists() == False and
             # すでにイベントに参加確定していないことを確認

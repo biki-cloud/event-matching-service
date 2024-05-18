@@ -17,7 +17,7 @@ for entry in data['organizers']:
         username=entry['username'],
         email=entry['email'],
         password=entry['password'],
-        role='organizer'
+        role_type='organizer'
     )
 
     # OrganizerProfileを作成
@@ -44,7 +44,7 @@ for entry in data['vendors']:
         username=entry['username'],
         email=entry['email'],
         password=entry['password'],
-        role='vendor'
+        role_type='vendor'
     )
     vendor_profile = VendorProfile.objects.create(
         user=user,

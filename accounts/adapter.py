@@ -10,5 +10,5 @@ class AccountAdapter(DefaultAccountAdapter):
         # Do not persist the user yet so we pass commit=False
         # (last argument)
         user = super(AccountAdapter, self).save_user(request, user, form, commit=False)
-        user.role = form.cleaned_data.get('role')
+        user.role_type = form.cleaned_data.get('role_type')
         user.save()
