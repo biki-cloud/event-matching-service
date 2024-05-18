@@ -15,9 +15,6 @@ ruff check . --fix
 # Ruffを使用してコードフォーマットをチェック
 ruff format .
 
-# 再度各コマンドを表示する設定 (冗長だがデバッグ目的)
-set -x
-
 # autoflakeを使用して未使用のインポートと変数を削除
 autoflake --remove-all-unused-imports --recursive --remove-unused-variables --in-place . --exclude=__init__.py
 
