@@ -96,7 +96,7 @@ $ ./reset_db.sh
 # コンテナを抜ける
 $ exit
 # 正常に起動することを確認
-$ docker-compose -f docker-compose-local.yaml up 
+$ docker-compose -f docker-compose-local.yaml up
 # バックグラウンドで起動させておく
 $ docker-compose -f docker-compose-local.yaml up -d
 # ec2を抜ける
@@ -112,6 +112,14 @@ http://127.0.0.1:8000
 #### 管理サイトへログイン
 
 http://127.0.0.1:8000/admin
+
+## pre-commit
+```bash
+# .pre-commit-config.yamlをローカルリポジトリに読み込ませる。
+# git commitすると自動で実行できるようになる。
+$ pre-commit install
+$ pre-commit autoapdate
+```
 
 # 参考ドキュメント
 
@@ -131,6 +139,9 @@ http://127.0.0.1:8000/admin
 - [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
 - [Django Allauth: The complete django-allauth guide - DEV Community](https://dev.to/gajesh/the-complete-django-allauth-guide-la3)
   - [django-experiments/allauthdemo at master · gajeshbhat/django-experiments](https://github.com/gajeshbhat/django-experiments/tree/master/allauthdemo)
+
+## pre-commit
+- [pre-commitでコミット時にコードの整形やチェックを行う](https://zenn.dev/yiskw713/articles/3c3b4022f3e3f22d276d)
 
 
 # TODO

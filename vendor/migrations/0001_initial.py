@@ -2,11 +2,11 @@
 
 import django.db.models.deletion
 from django.conf import settings
-from django.db import migrations, models
+from django.db import migrations
+from django.db import models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,11 +15,31 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='VendorProfile',
+            name="VendorProfile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('vendor_name', models.CharField(blank=True, max_length=255, verbose_name='主催者名')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='vendor_profile', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "vendor_name",
+                    models.CharField(
+                        blank=True, max_length=255, verbose_name="主催者名"
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="vendor_profile",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

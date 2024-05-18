@@ -8,5 +8,12 @@ __pycache__/
 .idea
 .env
 # カバレッジ関係
-coverage_report/
+.coverage_report/
 .coverage
+
+# venv
+venv/
+
+# 静的解析関係
+.mypy_cache/
+.ruff_cache/

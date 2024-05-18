@@ -1,13 +1,15 @@
+import logging
+
 from allauth.account.forms import SignupForm
 from django import forms
-from .models import CustomUser
-from organizer.models import OrganizerProfile
-from vendor.models import VendorProfile
-import logging
 from django.contrib import messages
 
+from organizer.models import OrganizerProfile
+from vendor.models import VendorProfile
 
-logger = logging.getLogger('myapp')
+from .models import CustomUser
+
+logger = logging.getLogger("myapp")
 
 
 class CustomSignupForm(SignupForm):
@@ -18,15 +20,17 @@ class CustomSignupForm(SignupForm):
 
     def signup(self, request, user):
         # ユーザアカウントの情報を保存
-        user.role_type = self.cleaned_data['role_type']
+        user.role_type = self.cleaned_data["role_type"]
         user.save()  # まずユーザを保存してから、プロファイルを作成します
 
-        if user.role_type == 'organizer':
-            organizer_profile = OrganizerProfile.objects.create(user=user)
-            messages.success(request, 'イベント主催者として登録しました')
-        
-        if user.role_type == 'vendor':
-            vendor_profile = VendorProfile.objects.create(user=user)
-            messages.success(request, 'イベント出店者として登録しました')
+        if user.role_type == "organizer":
+            # イベント主催者としてプロファイルを作成
+            OrganizerProfile.objects.create(user=user)
+            messages.success(request, "イベント主催者として登録しました")
+
+        if user.role_type == "vendor":
+            # イベント出店者としてプロファイルを作成
+            VendorProfile.objects.create(user=user)
+            messages.success(request, "イベント出店者として登録しました")
 
         return user
