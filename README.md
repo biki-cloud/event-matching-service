@@ -119,6 +119,8 @@ http://127.0.0.1:8000/admin
 # git commitすると自動で実行できるようになる。
 $ pre-commit install
 $ pre-commit autoapdate
+# 解除
+$ pre-commit uninstall
 ```
 
 # 参考ドキュメント
