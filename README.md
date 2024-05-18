@@ -134,10 +134,8 @@ http://127.0.0.1:8000/admin
     - ログアウト
   - ソーシャルログイン機能
   - パスワードリセットでmail送るとかの認証機能
-- accountのプロファイルCRUDとorganizer, vendorのプロファイルCRUDを作成
-  - update
-  - detail
 - organizerとvendorのappを作成した方が良さそう
   - 内容にorganizer+vendorのプロファイル設定とか自己紹介ページ作成とか
+- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
 - vendorやorganizerを検索するための機能は作った方が良さそう
 - 共有ボタン
