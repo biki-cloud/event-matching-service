@@ -13,8 +13,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import certifi
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+# .envファイルを読み込む
+env.read_env(os.path.join(BASE_DIR, ".env"))
 
 
 # Quick-start development settings - unsuitable for production
@@ -196,12 +203,15 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 # 認証方式を「メルアドとパスワード」に設定
 ACCOUNT_AUTHENTICATION_METHOD = "email"
+
 # ユーザ名は使用しない
 ACCOUNT_USERNAME_REQUIRED = False
 
 # ユーザ登録時に確認メールを送信するか(none=送信しない, mandatory=送信する)
 ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_EMAIL_REQUIRED = True  # ユーザ登録にメルアド必須にする
+
+# ユーザ登録にメルアド必須にする
+ACCOUNT_EMAIL_REQUIRED = True
 
 # passwordの入力を一回に
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
@@ -213,3 +223,14 @@ ACCOUNT_FORMS = {
 
 # signupformからの情報をcustomusermodelに保存するのに必要
 ACCOUNT_ADAPTER = "accounts.adapter.AccountAdapter"
+
+
+# メール送信設定
+# 証明書のパスを指定
+os.environ["SSL_CERT_FILE"] = certifi.where()
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
