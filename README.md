@@ -141,6 +141,7 @@ $ pre-commit uninstall
 - [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
 - [Django Allauth: The complete django-allauth guide - DEV Community](https://dev.to/gajesh/the-complete-django-allauth-guide-la3)
   - [django-experiments/allauthdemo at master · gajeshbhat/django-experiments](https://github.com/gajeshbhat/django-experiments/tree/master/allauthdemo)
+- [Googleのアプリパスワード（App passwords）が見つからない時の対処法 #JavaScript - Qiita](https://qiita.com/morima/items/58c51f7a35af2ed80050)
 
 ## pre-commit
 - [pre-commitでコミット時にコードの整形やチェックを行う](https://zenn.dev/yiskw713/articles/3c3b4022f3e3f22d276d)
