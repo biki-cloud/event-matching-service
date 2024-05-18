@@ -13,3 +13,7 @@ coverage_report/
 
 # venv
 venv/
+
+# 静的解析関係
+.mypy_cache/
+.ruff_cache/
