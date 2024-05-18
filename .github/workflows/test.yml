@@ -14,6 +14,11 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.12]
+        
+    env:
+      EMAIL_HOST: "dummy@gmail.com"
+      EMAIL_HOST_USER: "dummy_user@gmail.com"
+      EMAIL_HOST_PASSWORD: "dummy password"
 
     steps:
     - uses: actions/checkout@v4
