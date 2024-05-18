@@ -7,3 +7,6 @@ __pycache__/
 *$py.class
 .idea
 .env
+# カバレッジ関係
+coverage_report/
+.coverage
