@@ -2,10 +2,15 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
 
-from .forms import EventApplicationForm, EventForm
-from .models import Event, EventApplication, VendorProfile
+from .forms import EventApplicationForm
+from .forms import EventForm
+from .models import Event
+from .models import EventApplication
+from .models import VendorProfile
 
 # Create your views here.
 

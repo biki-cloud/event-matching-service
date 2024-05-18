@@ -6,8 +6,6 @@ from vendor.models import VendorProfile
 # Create your models here.
 
 
-
-
 class Event(models.Model):
     name = models.CharField(max_length=200, default="")
     date = models.DateField(default="2019-01-01")
