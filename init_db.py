@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth import get_user_model
 
+
 from events.models import Event
 from organizer.models import OrganizerProfile
 from vendor.models import VendorProfile
