@@ -113,6 +113,13 @@ http://127.0.0.1:8000
 
 http://127.0.0.1:8000/admin
 
+## pre-commit
+```bash
+# .pre-commit-config.yamlをローカルリポジトリに読み込ませる。
+# git commitすると自動で実行できるようになる。
+$ pre-commit install
+```
+
 # 参考ドキュメント
 
 ## Djangoについて
