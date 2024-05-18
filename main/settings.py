@@ -196,12 +196,15 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "/accounts/login/"
 
 # 認証方式を「メルアドとパスワード」に設定
 ACCOUNT_AUTHENTICATION_METHOD = "email"
+
 # ユーザ名は使用しない
 ACCOUNT_USERNAME_REQUIRED = False
 
 # ユーザ登録時に確認メールを送信するか(none=送信しない, mandatory=送信する)
 ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_EMAIL_REQUIRED = True  # ユーザ登録にメルアド必須にする
+
+# ユーザ登録にメルアド必須にする
+ACCOUNT_EMAIL_REQUIRED = True
 
 # passwordの入力を一回に
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
