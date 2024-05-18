@@ -42,12 +42,6 @@ repos:
   #     additional_dependencies: []
   #     minimum_pre_commit_version: '2.9.2'
 
-  - repo: https://github.com/aws-cloudformation/cfn-lint
-    rev: v0.71.0
-    hooks:
-      - id: cfn-lint
-        files: cfn/.*\.(json|yml|yaml)$
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
