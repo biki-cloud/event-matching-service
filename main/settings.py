@@ -31,14 +31,18 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts.apps.AccountsConfig',
-    'events.apps.EventsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'events.apps.EventsConfig',
+    'accounts.apps.AccountsConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -105,11 +110,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
 TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -119,12 +126,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-AUTH_USER_MODEL = 'accounts.CustomUser'
 
 CSRF_TRUSTED_ORIGINS = [
     os.environ.get('HOST_NAME')
@@ -169,3 +178,41 @@ STATICFILES_DIRS = [
     BASE_DIR / 'main/static',
     BASE_DIR / 'events/static',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# sitesフレームワーク用のサイトID
+SITE_ID = 1
+
+# ユーザモデルをカスタマイズしたモデルを指定
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# ログイン・ログアウト時のリダイレクト先
+LOGIN_REDIRECT_URL = '/events/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# 認証方式を「メルアドとパスワード」に設定
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ユーザ名は使用しない
+ACCOUNT_USERNAME_REQUIRED = False
+
+# ユーザ登録時に確認メールを送信するか(none=送信しない, mandatory=送信する)
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True   # ユーザ登録にメルアド必須にする
+
+#passwordの入力を一回に
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+#signupformを指定
+ACCOUNT_FORMS = {
+    'signup' : 'accounts.forms.CustomSignupForm',
+}
+
+#signupformからの情報をcustomusermodelに保存するのに必要
+ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'

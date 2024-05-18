@@ -1,0 +1,40 @@
+@startuml 
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "user" as user {
+  id
+  --
+  username
+  email
+  role(organizer | vendor)
+}
+
+entity "organizer_profile" as organizer_profile {
+  id
+  --
+  user<<FK>>
+}
+
+entity "vendor_profile" as vendor_profile {
+  id
+  --
+  user<<FK>>
+  vendor_name
+}
+
+entity "event" as event {
+  id
+  --
+  organizer<<FK>>
+  apply_vendors<<FK>>
+}
+
+user ||--|| organizer_profile
+user ||--|| vendor_profile
+event ||--o{ organizer_profile
+event }--{ vendor_profile
+
+@enduml

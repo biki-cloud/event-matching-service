@@ -110,20 +110,31 @@ http://127.0.0.1:8000/admin
 
 # 参考ドキュメント
 
-- [Djangoでカスタムユーザーを作ってみよう【AbstractBaseUser】](https://denno-sekai.com/django-customuser-abstractbaseuser/)
+## Djangoについて
 - [【Django】データベースを初期化する方法【リセット】 | アントレプレナー](https://kosuke-space.com/django-migration-reset)
-- [Djangoでカスタムユーザーを作ってみよう【AbstractBaseUser】](https://denno-sekai.com/django-customuser-abstractbaseuser/)
 - [Djangoでcreatesuperuserを自動化したいときに使えるオプション(--noinput) - delhi09の勉強日記](https://kamatimaru.hatenablog.com/entry/2021/02/28/030646)
 - [18.Djangoアプリでログイン時だけ投稿・編集を可能にしてみよう](https://denno-sekai.com/django-loginrequiredmixin/)
 - [【ソースコード付き】Django SNS アプリの作り方｜Shogo Saito](https://note.com/saito_pythonista/n/n6550f5c2a07b)
 - [EC2 amazon linux2 rootにスイッチする方法を検証してみた #AWS - Qiita](https://qiita.com/gama1234/items/23b8397d66a890771866)
 - [はじめてのDjango (7) 画像データの管理やページへの表示，アップロードの方法などについて知ろう #Python - Qiita](https://qiita.com/j54854/items/1f0560142e39d888251c)
+
+## html/cssについて
 - [codzsword/sidebar-bootstrap](https://github.com/codzsword/sidebar-bootstrap/tree/main)
 - [Explore and Download 8400+ Essential SVG Icons - Line icons](https://lineicons.com/icons)
 
+## 認証について(allauth)
+- [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
+- [Django Allauth: The complete django-allauth guide - DEV Community](https://dev.to/gajesh/the-complete-django-allauth-guide-la3)
+  - [django-experiments/allauthdemo at master · gajeshbhat/django-experiments](https://github.com/gajeshbhat/django-experiments/tree/master/allauthdemo)
+
+
 # TODO
-- organizer, vendorの自己紹介画面を作成(アカウントのprofileとは別)
+- allauth
+  - 各カスタムしたhtmlを作成
+    - ログアウト
+  - ソーシャルログイン機能
+  - パスワードリセットでmail送るとかの認証機能
+- organizerとvendorのappを作成した方が良さそう
+  - 内容にorganizer+vendorのプロファイル設定とか自己紹介ページ作成とか
 - vendorやorganizerを検索するための機能は作った方が良さそう
-- ソーシャルログイン機能
-- パスワードリセットでmail送るとかの認証機能
 - 共有ボタン
