@@ -6,7 +6,8 @@ repos:
         entry: mypy .
         language: system
         types: [python]
-        pass_filenames: false
+        pass_filenames: true
+        files: \.py$
         verbose: true
         stages: [commit]
       - id: ruff-check-fix
