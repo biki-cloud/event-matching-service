@@ -10,3 +10,6 @@ __pycache__/
 # カバレッジ関係
 coverage_report/
 .coverage
+
+# venv
+venv/
