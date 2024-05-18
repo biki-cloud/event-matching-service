@@ -27,6 +27,7 @@ def event_list(request):
     #  Event.objects.filter(status='published')
     else:
         events = Event.objects.filter(status="published")
+
     return render(request, "events/event_list.html", {"events": events})
 
 
