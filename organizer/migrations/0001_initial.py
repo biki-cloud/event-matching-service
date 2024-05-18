@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -15,12 +14,40 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='OrganizerProfile',
+            name="OrganizerProfile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('phone', models.CharField(blank=True, max_length=255, verbose_name='電話番号')),
-                ('gender', models.CharField(blank=True, choices=[('女性', '女性'), ('男性', '男性')], max_length=2, verbose_name='性別')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='organizer_profile', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "phone",
+                    models.CharField(
+                        blank=True, max_length=255, verbose_name="電話番号"
+                    ),
+                ),
+                (
+                    "gender",
+                    models.CharField(
+                        blank=True,
+                        choices=[("女性", "女性"), ("男性", "男性")],
+                        max_length=2,
+                        verbose_name="性別",
+                    ),
+                ),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="organizer_profile",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
