@@ -1,4 +1,4 @@
-@startuml 
+@startuml
 hide circle
 
 ' avoid problems with angled crows feet

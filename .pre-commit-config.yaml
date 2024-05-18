@@ -42,16 +42,18 @@ repos:
         - django-stubs
         - django-allauth
 
-  - repo: https://github.com/PyCQA/flake8
-    rev: 7.0.0
-    hooks:
-      - id: flake8
-
   - repo: https://github.com/psf/black
     rev: 24.4.2
     hooks:
       - id: black
         language_version: python3.12
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        # デフォルトは79文字だが、結構ひっかかるので150文字に変更
+        args: ['--max-line-length=150']
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0

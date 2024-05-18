@@ -1,12 +1,14 @@
 from django.urls import path
 
-from .views import check_application
-from .views import create_event
-from .views import delete_event
-from .views import event_detail
-from .views import event_list
-from .views import request_application
-from .views import update_event
+from .views import (
+    check_application,
+    create_event,
+    delete_event,
+    event_detail,
+    event_list,
+    request_application,
+    update_event,
+)
 
 urlpatterns = [
     path("", event_list, name="events_home"),

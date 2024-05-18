@@ -2,15 +2,10 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import EventApplicationForm
-from .forms import EventForm
-from .models import Event
-from .models import EventApplication
-from .models import VendorProfile
+from .forms import EventApplicationForm, EventForm
+from .models import Event, EventApplication, VendorProfile
 
 # Create your views here.
 
@@ -28,7 +23,8 @@ def event_list(request):
     # TODO: あとで実装
     # elif request.user.role == 'organizer':
     #     organizer_profile = OrganizerProfile.objects.get(user=request.user)
-    #     events = Event.objects.filter(organizer=organizer_profile) | Event.objects.filter(status='published')
+    #     events = Event.objects.filter(organizer=organizer_profile) |
+    #  Event.objects.filter(status='published')
     else:
         events = Event.objects.filter(status="published")
     return render(request, "events/event_list.html", {"events": events})

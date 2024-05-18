@@ -17,11 +17,9 @@ Including another URLconf
 
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include
-from django.urls import path
+from django.urls import include, path
 
-from .settings import MEDIA_ROOT
-from .settings import MEDIA_URL
+from .settings import MEDIA_ROOT, MEDIA_URL
 from .views import home
 
 urlpatterns = [

@@ -120,7 +120,7 @@
             <li class="sidebar-item">
               <a href="{% url 'account_logout'%}" class="sidebar-link">Logout</a>
             </li>
-            
+
           {% else %}
             <li class="sidebar-item">
               <a href="{% url 'account_signup' %}" class="sidebar-link">Register</a>
@@ -128,11 +128,11 @@
             <li class="sidebar-item">
               <a href="{% url 'account_login' %}?next={{ request.path }}" class="sidebar-link">Login</a>
             </li>
-            
+
           {% endif %}
           </ul>
         </li>
-        
+
       </aside>
       <div class="main p-3">
         <div class="text-center">

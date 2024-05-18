@@ -3,7 +3,7 @@ console.log("root script.js loaded");
 document.addEventListener('DOMContentLoaded', function() {
   const sidebar = document.querySelector('#sidebar');
   const storedSidebarState = localStorage.getItem('sidebarExpanded');
-  
+
   if (storedSidebarState === 'true') {
     sidebar.classList.add('expand');
   }
