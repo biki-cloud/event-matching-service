@@ -8,7 +8,7 @@ __pycache__/
 .idea
 .env
 # カバレッジ関係
-coverage_report/
+.coverage_report/
 .coverage
 
 # venv
