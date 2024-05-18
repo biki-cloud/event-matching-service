@@ -3,18 +3,18 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 
-from .models import OrganizerProfile
-from .forms import OrganizerCreateForm
+from .models import VendorProfile
+from .forms import VendorCreateForm
 
-class OrganizerDetailView(DetailView):
-    model = OrganizerProfile
-    template_name = 'organizer/organizer_detail.html'
-    context_object_name = 'organizer'
+class VendorDetailView(DetailView):
+    model = VendorProfile
+    template_name = 'vendor/vendor_detail.html'
+    context_object_name = 'vendor'
 
 class OrganizerCreateView(CreateView):
-    model = OrganizerProfile
-    template_name = 'organizer/organizer_create.html'
-    form_class = OrganizerCreateForm
+    model = VendorProfile
+    template_name = 'vendor/vendor_create.html'
+    form_class = VendorCreateForm
     success_url = '/events/list'
 
     # ログインしているユーザーを context に追加
@@ -28,4 +28,5 @@ class OrganizerCreateView(CreateView):
     # ここでフォームの内容を保存する
     def form_valid(self, form):
         form.instance.user = self.request.user  # ログインしているユーザーを OrganizerProfile の user に設定
+        messages.success(self.request, 'イベント出店者情報を登録しました')
         return super().form_valid(form)
