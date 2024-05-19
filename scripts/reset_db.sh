@@ -23,4 +23,4 @@ export DJANGO_SUPERUSER_PASSWORD=$(printenv DJANGO_SUPERUSER_PASSWORD)
 python manage.py createsuperuser --noinput
 
 # Create regular user with OrganizerProfile
-python manage.py shell < init_db.py
+python manage.py shell < ./scripts/init_db.py

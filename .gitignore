@@ -7,7 +7,9 @@ __pycache__/
 *$py.class
 .idea
 .env
-# カバレッジ関係
+
+# テスト & カバレッジ関係
+.pytest_cache/
 .coverage_report/
 .coverage
 

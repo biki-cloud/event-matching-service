@@ -15,76 +15,27 @@
 
 ## 開発について
 
-### アプリケーションの作成
-
-```bash
-$ python manage.py startapp <app name>
-```
-
-### マイグレーションについて
-
-#### マイグレーションを作成
-
-```bash
-$ python manage.py makemigrations
-```
-
-#### マイグレーションを実行
-
-```bash
-$ python manage.py migrate
-```
-
-#### マイグレーションのスクリプト
-
-```bash
-$ ./migrations.sh
-```
-
-## DBについて
-
-### sqliteにてテーブルを確認
-
-```bash
-$ sqlite3 db.sqlite3
-# テーブル一覧を表示
-sqlite> .tables
-
-# テーブルの情報を表示
-sqlite> select * from <table name>;
-
-# テーブルを抜ける
-sqlite> .exit
-```
-
-### DBのリセット
-
-#### 環境変数をセット
+### DB情報のリセット
 ```bash
 # 以下のように環境変数をセット
 $ cat .env
 DJANGO_SUPERUSER_EMAIL=<アドミンユーザのemail>
 DJANGO_SUPERUSER_PASSWORD=<アドミンユーザのパスワード>
-ORIGIN_DOMAIN=<オリジンのドメイン>
+EMAIL_HOST=<xxxx>
+EMAIL_HOST_USER=<xxxx>
+EMAIL_HOST_PASSWORD=<xxxx>
 
 # 環境変数を読み込む
 $ source .env
-```
 
-#### 1. スーパユーザのemailとパスワードを設定
-
-- secrets/admin_email.txtにemailを記載
-- secrets/admin_password.txtにパスワードを記載
-  ※作成されている場合は不要
-
-#### 2. DBのリセットスクリプトを実行
-
-```bash
-$ ./db_reset.sh
+# DBのリセットスクリプトを実行
+$ ./scripts/db_reset.sh
 ```
 
 #### EC2インスタンスで起動
 ```bash
+# EC2インスタンスにログイン
+$ ssh ec2
 $ cd miccle-django-app
 $ git stash -u
 $ git pull origin main
@@ -107,7 +58,7 @@ $ exit
 
 #### ホーム画面
 
-http://127.0.0.1:8000
+http://127.0.0.1:8000/events
 
 #### 管理サイトへログイン
 
@@ -118,10 +69,28 @@ http://127.0.0.1:8000/admin
 # .pre-commit-config.yamlをローカルリポジトリに読み込ませる。
 # git commitすると自動で実行できるようになる。
 $ pre-commit install
-$ pre-commit autoapdate
 # 解除
 $ pre-commit uninstall
 ```
+
+## pytest E2E 事前準備 & テストコード作成
+```bash
+# ブラウザのインストール（chromium,firefox,webkit等）
+$ playwright install
+
+# Webサーバの起動（別ターミナルで）
+$ python manage.py runser
+
+# サンプルテストコードを作成
+$ playwright codegen http://127.0.0.1:8000/ -o e2e/test_sample.py
+```
+
+## 環境構築
+```bash
+$ python3 -m venv venv
+$ pip install -r requirements.txt
+```
+またはdockerコンテナを構築
 
 # 参考ドキュメント
 
@@ -141,6 +110,7 @@ $ pre-commit uninstall
 - [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
 - [Django Allauth: The complete django-allauth guide - DEV Community](https://dev.to/gajesh/the-complete-django-allauth-guide-la3)
   - [django-experiments/allauthdemo at master · gajeshbhat/django-experiments](https://github.com/gajeshbhat/django-experiments/tree/master/allauthdemo)
+- allauthでhtmlをカスタムする際はvenv/allauth/templates/accountに配置されているhtmlを持ってきてbase.htmlを修正して配置する。もしくはこの辺: https://github.com/pennersr/django-allauth/blob/main/allauth/templates/account/logout.html
 
 ### メール送信
 - [2024年最新版 - DjangoからGmailを送信 #Python - Qiita](https://qiita.com/OzWay_jon/items/cf16429cd7f64ff8670d)
@@ -150,15 +120,14 @@ $ pre-commit uninstall
 ## pre-commit
 - [pre-commitでコミット時にコードの整形やチェックを行う](https://zenn.dev/yiskw713/articles/3c3b4022f3e3f22d276d)
 
+## テスト
+- [E2Eテスト（ブラウザ画面テスト）｜テストコードのすすめ（Django編）](https://zenn.dev/hideoamezawa/books/study_testcode/viewer/6_e2e_test)
+- [Writing tests | Playwright Python](https://playwright.dev/python/docs/writing-tests)
+
 
 # TODO
-- allauth
-  - 各カスタムしたhtmlを作成
-    - ログアウト
-  - ソーシャルログイン機能
-  - パスワードリセットでmail送るとかの認証機能
-- テストコードの追加
 - バックアップ機能
-- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
-- vendorやorganizerを検索するための機能は作った方が良さそう
+- vendorやorganizerを検索するための機能作成
 - 共有ボタン
+- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
+- ソーシャルログイン機能
