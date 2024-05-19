@@ -13,7 +13,7 @@ jobs:
       EMAIL_HOST: "dummy@gmail.com"
       EMAIL_HOST_USER: "dummy_user@gmail.com"
       EMAIL_HOST_PASSWORD: "dummy password"
-      
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
@@ -26,19 +26,15 @@ jobs:
         pip install -r requirements.txt
     - name: Ensure browsers are installed
       run: python -m playwright install --with-deps
-      
+
     - name: Start Django server
       run: |
         python manage.py runserver &
         sleep 5  # Wait for server to start
 
-    - name: curl
-      run: |
-        curl http://127.0.0.1:8000/events/list
-        
     - name: Run your tests
       run: |
-        pytest 
+        pytest
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
