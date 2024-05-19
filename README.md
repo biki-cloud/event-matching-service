@@ -123,6 +123,25 @@ $ pre-commit autoapdate
 $ pre-commit uninstall
 ```
 
+## pytest E2E
+```bash
+# ブラウザのインストール（chromium,firefox,webkit等）
+$ playwright install
+
+# Webサーバの起動（別ターミナルで）
+$ python manage.py runser
+
+# サンプルテストコードを作成
+$ playwright codegen http://127.0.0.1:8000/ -o e2e/test_sample.py
+```
+
+## 環境構築
+```bash
+$ python3 -m venv venv
+$ pip install -r requirements.txt
+```
+またはdockerコンテナを構築
+
 # 参考ドキュメント
 
 ## Djangoについて
@@ -150,6 +169,9 @@ $ pre-commit uninstall
 
 ## pre-commit
 - [pre-commitでコミット時にコードの整形やチェックを行う](https://zenn.dev/yiskw713/articles/3c3b4022f3e3f22d276d)
+
+## テスト
+- [E2Eテスト（ブラウザ画面テスト）｜テストコードのすすめ（Django編）](https://zenn.dev/hideoamezawa/books/study_testcode/viewer/6_e2e_test)
 
 
 # TODO
