@@ -141,6 +141,7 @@ $ pre-commit uninstall
 - [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
 - [Django Allauth: The complete django-allauth guide - DEV Community](https://dev.to/gajesh/the-complete-django-allauth-guide-la3)
   - [django-experiments/allauthdemo at master · gajeshbhat/django-experiments](https://github.com/gajeshbhat/django-experiments/tree/master/allauthdemo)
+- allauthでhtmlをカスタムする際はvenv/allauth/templates/accountに配置されているhtmlを持ってきてbase.htmlを修正して配置する。
 
 ### メール送信
 - [2024年最新版 - DjangoからGmailを送信 #Python - Qiita](https://qiita.com/OzWay_jon/items/cf16429cd7f64ff8670d)
@@ -152,13 +153,10 @@ $ pre-commit uninstall
 
 
 # TODO
-- allauth
-  - 各カスタムしたhtmlを作成
-    - ログアウト
-  - ソーシャルログイン機能
-  - パスワードリセットでmail送るとかの認証機能
 - テストコードの追加
 - バックアップ機能
 - EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
-- vendorやorganizerを検索するための機能は作った方が良さそう
+- vendorやorganizerを検索するための機能作成
+- クラスベースviewに書き換え
 - 共有ボタン
+- ソーシャルログイン機能
