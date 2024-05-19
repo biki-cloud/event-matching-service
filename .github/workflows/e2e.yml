@@ -31,6 +31,10 @@ jobs:
       run: |
         python manage.py runserver &
         sleep 5  # Wait for server to start
+
+    - name: curl
+      run: |
+        curl http://127.0.0.1:8000/events/list
         
     - name: Run your tests
       run: |
