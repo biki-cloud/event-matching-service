@@ -9,10 +9,6 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     
-    env:
-      EMAIL_HOST: "dummy@gmail.com"
-      EMAIL_HOST_USER: "dummy_user@gmail.com"
-      EMAIL_HOST_PASSWORD: "dummy password"
       
     steps:
     - uses: actions/checkout@v4
@@ -28,7 +24,6 @@ jobs:
       run: python -m playwright install --with-deps
     - name: Run your tests
       run: |
-        python manage.py runserver 8000 & 
         pytest --tracing=retain-on-failure
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
