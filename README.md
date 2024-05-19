@@ -127,6 +127,7 @@ $ pip install -r requirements.txt
 
 # TODO
 - バックアップ機能
+- e2eはサーバ内でアプリを起動する必要がある
 - vendorやorganizerを検索するための機能作成
 - 共有ボタン
 - EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
