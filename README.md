@@ -15,76 +15,27 @@
 
 ## 開発について
 
-### アプリケーションの作成
-
-```bash
-$ python manage.py startapp <app name>
-```
-
-### マイグレーションについて
-
-#### マイグレーションを作成
-
-```bash
-$ python manage.py makemigrations
-```
-
-#### マイグレーションを実行
-
-```bash
-$ python manage.py migrate
-```
-
-#### マイグレーションのスクリプト
-
-```bash
-$ ./migrations.sh
-```
-
-## DBについて
-
-### sqliteにてテーブルを確認
-
-```bash
-$ sqlite3 db.sqlite3
-# テーブル一覧を表示
-sqlite> .tables
-
-# テーブルの情報を表示
-sqlite> select * from <table name>;
-
-# テーブルを抜ける
-sqlite> .exit
-```
-
-### DBのリセット
-
-#### 環境変数をセット
+### DB情報のリセット
 ```bash
 # 以下のように環境変数をセット
 $ cat .env
 DJANGO_SUPERUSER_EMAIL=<アドミンユーザのemail>
 DJANGO_SUPERUSER_PASSWORD=<アドミンユーザのパスワード>
-ORIGIN_DOMAIN=<オリジンのドメイン>
+EMAIL_HOST=<xxxx>
+EMAIL_HOST_USER=<xxxx>
+EMAIL_HOST_PASSWORD=<xxxx>
 
 # 環境変数を読み込む
 $ source .env
-```
 
-#### 1. スーパユーザのemailとパスワードを設定
-
-- secrets/admin_email.txtにemailを記載
-- secrets/admin_password.txtにパスワードを記載
-  ※作成されている場合は不要
-
-#### 2. DBのリセットスクリプトを実行
-
-```bash
-$ ./db_reset.sh
+# DBのリセットスクリプトを実行
+$ ./scripts/db_reset.sh
 ```
 
 #### EC2インスタンスで起動
 ```bash
+# EC2インスタンスにログイン
+$ ssh ec2
 $ cd miccle-django-app
 $ git stash -u
 $ git pull origin main
@@ -107,7 +58,7 @@ $ exit
 
 #### ホーム画面
 
-http://127.0.0.1:8000
+http://127.0.0.1:8000/events
 
 #### 管理サイトへログイン
 
@@ -118,12 +69,11 @@ http://127.0.0.1:8000/admin
 # .pre-commit-config.yamlをローカルリポジトリに読み込ませる。
 # git commitすると自動で実行できるようになる。
 $ pre-commit install
-$ pre-commit autoapdate
 # 解除
 $ pre-commit uninstall
 ```
 
-## pytest E2E
+## pytest E2E 事前準備 & テストコード作成
 ```bash
 # ブラウザのインストール（chromium,firefox,webkit等）
 $ playwright install
@@ -172,13 +122,12 @@ $ pip install -r requirements.txt
 
 ## テスト
 - [E2Eテスト（ブラウザ画面テスト）｜テストコードのすすめ（Django編）](https://zenn.dev/hideoamezawa/books/study_testcode/viewer/6_e2e_test)
+- [Writing tests | Playwright Python](https://playwright.dev/python/docs/writing-tests)
 
 
 # TODO
-- テストコードの追加
 - バックアップ機能
-- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
 - vendorやorganizerを検索するための機能作成
-- クラスベースviewに書き換え
 - 共有ボタン
+- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
 - ソーシャルログイン機能
