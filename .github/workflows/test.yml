@@ -34,6 +34,9 @@ jobs:
       run: |
         coverage run manage.py test
         coverage html -d coverage_report
+    - name: Run Pytest e2e
+      run: |
+        pytest e2e
     - name: Upload coverage files
       uses: actions/upload-artifact@v4
       with:
