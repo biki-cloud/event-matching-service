@@ -36,6 +36,7 @@ jobs:
         coverage html -d coverage_report
     - name: Run Pytest e2e
       run: |
+        playwright install
         pytest e2e
     - name: Upload coverage files
       uses: actions/upload-artifact@v4
