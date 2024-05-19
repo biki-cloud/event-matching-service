@@ -7,7 +7,7 @@ from organizer.models import OrganizerProfile
 from vendor.models import VendorProfile
 
 # JSONファイルを読み込む
-with open("init_data.json") as f:
+with open("scripts/init_data.json") as f:
     data = json.load(f)
 
 User = get_user_model()
