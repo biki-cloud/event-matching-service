@@ -8,6 +8,12 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
+    env:
+      EMAIL_HOST: "dummy@gmail.com"
+      EMAIL_HOST_USER: "dummy_user@gmail.com"
+      EMAIL_HOST_PASSWORD: "dummy password"
+      
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
