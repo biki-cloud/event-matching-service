@@ -83,6 +83,12 @@ $ python manage.py runser
 
 # サンプルテストコードを作成
 $ playwright codegen http://127.0.0.1:8000/ -o e2e/test_sample.py
+
+$ brew install allure
+
+$ pytest --alluredir=.hoge
+
+$ allure serve .hoge
 ```
 
 ## 環境構築
