@@ -1,6 +1,8 @@
+import allure
 from playwright.sync_api import Page
 
 
+@allure.title("GitHubでYusukeIwakiのページを確認する")
 def test_signup_organizer(page: Page) -> None:
     page.goto("http://127.0.0.1:8000/events/")
 
