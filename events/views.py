@@ -4,8 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
+from organizer.models import OrganizerProfile
+from vendor.models import VendorProfile
+
 from .forms import EventApplicationForm, EventForm
-from .models import Event, EventApplication, VendorProfile
+from .models import Event, EventApplication
 
 # Create your views here.
 
@@ -20,11 +23,11 @@ def event_list(request):
         or request.user.role_type == "vendor"
     ):
         events = Event.objects.filter(status="published")
-    # TODO: あとで実装
-    # elif request.user.role == 'organizer':
-    #     organizer_profile = OrganizerProfile.objects.get(user=request.user)
-    #     events = Event.objects.filter(organizer=organizer_profile) |
-    #  Event.objects.filter(status='published')
+    elif request.user.role_type == "organizer":
+        organizer_profile = OrganizerProfile.objects.get(user=request.user)
+        events = Event.objects.filter(
+            organizer=organizer_profile
+        ) | Event.objects.filter(status="published")
     else:
         events = Event.objects.filter(status="published")
 
