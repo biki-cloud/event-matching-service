@@ -86,9 +86,9 @@ $ playwright codegen http://127.0.0.1:8000/ -o e2e/test_sample.py
 
 $ brew install allure
 
-$ pytest --alluredir=.hoge
+$ pytest --alluredir=.pytest-alluredir
 
-$ allure serve .hoge
+$ allure serve .pytest-alluredir.
 ```
 
 ## 環境構築

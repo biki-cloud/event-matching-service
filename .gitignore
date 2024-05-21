@@ -13,6 +13,7 @@ __pycache__/
 .coverage_report/
 .coverage
 .pytest-results/
+.pytest-alluredir
 
 # venv
 venv/
