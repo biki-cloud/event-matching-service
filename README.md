@@ -1,7 +1,7 @@
-# miccle
+# event-matching-service
 
-<a href="https://github.com/biki-cloud/miccle-django-app/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/biki-cloud/miccle-django-app/workflows/Test/badge.svg" alt="Test"></a>
-<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/biki-cloud/miccle-django-app" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/biki-cloud/miccle-django-app.svg" alt="Coverage"></a>
+<a href="https://github.com/biki-cloud/event-matching-service/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/biki-cloud/event-matching-service/workflows/Test/badge.svg" alt="Test"></a>
+<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/biki-cloud/event-matching-service" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/biki-cloud/event-matching-service.svg" alt="Coverage"></a>
 
 
 ## 概要
@@ -36,12 +36,12 @@ $ ./scripts/db_reset.sh
 ```bash
 # EC2インスタンスにログイン
 $ ssh ec2
-$ cd miccle-django-app
+$ cd event-matching-service
 $ git stash -u
 $ git pull origin main
 $ docker-compose -f docker-compose-local.yaml down
 $ docker-compose -f docker-compose-local.yaml up --build
-$ docker exec -it miccle bash
+$ docker exec -it event-matching-service bash
 # 正常に実行することを確認
 $ ./reset_db.sh
 # コンテナを抜ける
@@ -98,6 +98,24 @@ $ pip install -r requirements.txt
 ```
 またはdockerコンテナを構築
 
+## バックアップ
+```bash
+# バックアップを取る
+$ python manage.py dbbackup
+# ファイル名指定してバックアップを取る
+$ python manage.py dbbackup -o <file name>
+# 古いファイルは削除してバックアップを取る
+$ python manage.py dbbackup --clean
+# データをリストア(復元)する
+$ python manage.py dbrestore
+# バックアップファイルを指定してデータをリストア(復元)する
+$ python manage.py dbrestore -i <file name>
+# メディアファイルのバックアップ
+$ python manage.py mediabackup
+# メディアファイルのリストア
+$ python manage.py mediarestore
+```
+
 # 参考ドキュメント
 
 ## Djangoについて
@@ -131,8 +149,10 @@ $ pip install -r requirements.txt
 - [Writing tests | Playwright Python](https://playwright.dev/python/docs/writing-tests)
 - [playwright-pythonを使ってE2Eテストを始める](https://zenn.dev/yusukeiwaki/articles/8e2b159a8d90bf)
 
+## バックアップ
+- [Djangoでデータベースのバックアップを取る方法&外部ストレージとの連携方法 - Djangoの学習ができるチュートリアルサイトDjangoBrothers](https://djangobrothers.com/blogs/djang_dbbackup/)
+
 # TODO
-- バックアップ機能
 - vendorやorganizerを検索するための機能作成
 - 共有ボタン
 - EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に

@@ -34,7 +34,7 @@ SECRET_KEY = "django-insecure-xlmb#ji-j66*&#c4-4iaun$-uf21d)23rvsm@=^+x))446y^y1
 DEBUG = True
 
 # ALLOWED_HOSTS = [os.environ.get('HOST_NAME'), '0.0.0.0', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", ".vercel.app"]
 
 # Application definition
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "organizer.apps.OrganizerConfig",
     "vendor.apps.VendorConfig",
+    "dbbackup",  # バックアップ用
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-ROOT_URLCONF = "main.urls"
+ROOT_URLCONF = "event-matching-service.urls"
 
 TEMPLATES = [
     {
@@ -84,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "main.wsgi.application"
+WSGI_APPLICATION = "event-matching-service.wsgi.application"
 
 
 # Database
@@ -234,3 +235,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+# バックアップ設定
+# ファイルでバックアップを行う設定
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+# BASE_DIR/backups/にバックアップファイルを保存する設定
+DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backups")}
+# 最新の3つのファイルを保存(それより古いものは順番に破棄)する設定
+DBBACKUP_CLEANUP_KEEP = 3
+# メディアのバックアップファイルも同様の設定
+DBBACKUP_CLEANUP_KEEP_MEDIA = 3
