@@ -1,62 +1,83 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ event.name }}{% endblock %}
+
+
 
 {% block content %}
-
-
+<head>
+<link rel="stylesheet" href="{% static 'events/css/event_detail.css' %}">
+</head>
 <div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card mt-5">
-        <div class="card-header">
-          <h2 class="card-title">{{ event.name }}</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="event-container">
+        <div class="event-header">
+          <h2>{{ event.name }}</h2>
+          <span class="event-badge">{{ event.type }}</span>
         </div>
-        <div class="card-body">
+        <div class="event-body">
           {% if event.image %}
-            <img src="{{ event.image.url }}" alt="プロフィール画像" class="img-fluid">
+            <div class="text-center mb-4">
+              <img src="{{ event.image.url }}" alt="プロフィール画像" class="img-fluid rounded shadow-sm">
+            </div>
           {% endif %}
-          <h5 class="card-subtitle mb-2 text-muted">日付: {{ event.date }}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">場所: {{ event.location }}</h5>
-          <h5 class="card-subtitle mb-2 text-muted">ジャンル: {{ event.type }}</h5>
-          <p class="card-text">{{ event.description }}</p>
-          <h5 class="card-subtitle mb-2 text-muted">イベント作成者: {{ event.organizer.user.username }}</h5>
-          </ul>
-          <h5 class="card-subtitle mb-2 text-muted">イベント参加申請中:</h5>
-          <ul>
+
+          <div class="event-info">
+            <i class="bi bi-calendar3"></i>
+            <h5>{{ event.date }}</h5>
+          </div>
+          <div class="event-info">
+            <i class="bi bi-geo-alt"></i>
+            <h5>{{ event.location }}</h5>
+          </div>
+
+          <p>{{ event.description }}</p>
+          <h5 class="text-muted event-info-title">イベント作成者:</h5>
+          <span class="text-body">{{ event.organizer.user.username }}</span>
+
+          <h5 class="text-muted event-info-title">イベント参加申請中:</h5>
+          <ul class="list-group mb-4">
             {% for event_application in request_non_approved_applications.all %}
-              <li>{{ event_application.vendor.user.username }} </li>
-              {% if organizer_can_edit %}
-                <a href="{% url 'check_application' event_application.id %}">承認/拒否</a>
-              {% endif %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ event_application.vendor.user.username }}
+                {% if organizer_can_edit %}
+                  <a href="{% url 'check_application' event_application.id %}" class="btn btn-sm btn-outline-primary">承認/拒否</a>
+                {% endif %}
+              </li>
             {% endfor %}
           </ul>
-          <h5 class="card-subtitle mb-2 text-muted">イベント参加確定:</h5>
-          <ul>
+
+          <h5 class="text-muted event-info-title">イベント参加確定:</h5>
+          <ul class="list-group mb-4">
             {% for event_application in request_approved_applications.all %}
-              <li>{{ event_application.vendor.user.username }}</li>
+              <li class="list-group-item">{{ event_application.vendor.user.username }}</li>
             {% endfor %}
           </ul>
 
           {% if organizer_can_see_status %}
+            <h5 class="text-muted">イベントステータス:</h5>
             {% if event.status == 'draft' %}
-              <h5 class="card-subtitle mb-2 text-muted">イベントステータス: 下書き</h5>
+              <span class="badge bg-secondary">下書き</span>
             {% elif event.status == 'published' %}
-              <h5 class="card-subtitle mb-2 text-muted">イベントステータス: 公開済み</h5>
+              <span class="badge bg-success">公開済み</span>
             {% endif %}
           {% endif %}
 
-          {% if vendor_can_apply %}
-            <a href="{% url 'request_application' event.pk %}" class="btn btn-warning">イベント参加リクエスト</a>
-          {% endif %}
+          <div class="event-actions mt-4">
+            {% if vendor_can_apply %}
+              <a href="{% url 'request_application' event.pk %}" class="btn btn-warning">イベント参加リクエスト</a>
+            {% endif %}
 
-          {% if organizer_can_edit %}
-            <a href="{% url 'event_update' event.pk %}" class="btn btn-warning">編集</a>
-          {% endif %}
+            {% if organizer_can_edit %}
+              <a href="{% url 'event_update' event.pk %}" class="btn btn-info">編集</a>
+            {% endif %}
 
-          {% if organizer_can_delete %}
-            <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a>
-          {% endif %}
-
-
+            {% if organizer_can_delete %}
+              <a href="{% url 'event_delete' event.pk %}" class="btn btn-danger">削除</a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

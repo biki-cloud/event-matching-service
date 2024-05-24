@@ -1,0 +1,82 @@
+.event-container {
+    background-color: #f8f9fa; /* 明るいグレーに変更 */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* シャドウを強調 */
+    margin-top: 2rem;
+}
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0056b3; /* 濃い青に変更 */
+    color: white;
+    padding: 1rem;
+    border-radius: 8px 8px 0 0;
+}
+.event-header h2 {
+    margin: 0;
+}
+.event-badge {
+    background-color: #28a745; /* 緑色に変更 */
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.9rem;
+}
+.event-body {
+    padding: 1rem;
+}
+.event-body h5, .event-body p {
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+.event-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+.event-info i {
+    margin-right: 0.5rem;
+    color: #007bff;
+}
+.event-actions {
+    display: flex;
+    gap: 1rem;
+}
+.event-actions a {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white; /* テキスト色を白に */
+    background-color: #17a2b8; /* ボタンの背景色を水色に */
+    border: none; /* 枠線を削除 */
+}
+.btn-warning {
+    background-color: #ffc107; /* 黄色を維持 */
+    color: #212529;
+}
+.btn-info {
+    background-color: #17a2b8; /* 水色を維持 */
+    color: white;
+}
+.btn-danger {
+    background-color: #dc3545; /* 赤色を維持 */
+}
+
+.event-info-title {
+    font-size: 1.2rem;
+    color: #0056b3; /* テーマカラーの青 */
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.list-group-item {
+    border: none; /* リストアイテムのボーダーを削除 */
+    background-color: #f8f9fa; /* 背景色を明るいグレーに */
+}
+
+.list-group-item:hover {
+    background-color: #e2e6ea; /* ホバー時の背景色を少し暗く */
+}
