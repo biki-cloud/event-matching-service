@@ -83,6 +83,12 @@ $ python manage.py runser
 
 # サンプルテストコードを作成
 $ playwright codegen http://127.0.0.1:8000/ -o e2e/test_sample.py
+
+$ brew install allure
+
+$ pytest --alluredir=.pytest-alluredir
+
+$ allure serve .pytest-alluredir.
 ```
 
 ## 環境構築
@@ -123,11 +129,10 @@ $ pip install -r requirements.txt
 ## テスト
 - [E2Eテスト（ブラウザ画面テスト）｜テストコードのすすめ（Django編）](https://zenn.dev/hideoamezawa/books/study_testcode/viewer/6_e2e_test)
 - [Writing tests | Playwright Python](https://playwright.dev/python/docs/writing-tests)
-
+- [playwright-pythonを使ってE2Eテストを始める](https://zenn.dev/yusukeiwaki/articles/8e2b159a8d90bf)
 
 # TODO
 - バックアップ機能
-- e2eはサーバ内でアプリを起動する必要がある
 - vendorやorganizerを検索するための機能作成
 - 共有ボタン
 - EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
