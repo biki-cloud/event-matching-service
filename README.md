@@ -155,6 +155,5 @@ $ python manage.py mediarestore
 # TODO
 - vendorやorganizerを検索するための機能作成
 - 共有ボタン
-
 - EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
 - ソーシャルログイン機能
