@@ -153,7 +153,6 @@ $ python manage.py mediarestore
 - [Djangoでデータベースのバックアップを取る方法&外部ストレージとの連携方法 - Djangoの学習ができるチュートリアルサイトDjangoBrothers](https://djangobrothers.com/blogs/djang_dbbackup/)
 
 # TODO
-- バックアップ機能
 - vendorやorganizerを検索するための機能作成
 - 共有ボタン
 - EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
