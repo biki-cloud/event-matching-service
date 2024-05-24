@@ -26,13 +26,14 @@
 
           <div class="event-info">
             <i class="bi bi-calendar3"></i>
-            <h5>{{ event.date }}</h5>
+            <h5>日付: {{ event.date }}</h5>
           </div>
           <div class="event-info">
             <i class="bi bi-geo-alt"></i>
-            <h5>{{ event.location }}</h5>
+            <h5>場所: {{ event.location }}</h5>
           </div>
 
+          <h5 class="text-muted event-info-title">説明:</h5>
           <p>{{ event.description }}</p>
           <h5 class="text-muted event-info-title">イベント作成者:</h5>
           <span class="text-body">{{ event.organizer.user.username }}</span>
