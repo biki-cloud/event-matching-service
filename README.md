@@ -1,7 +1,7 @@
-# miccle
+# event-matching-service
 
-<a href="https://github.com/biki-cloud/miccle-django-app/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/biki-cloud/miccle-django-app/workflows/Test/badge.svg" alt="Test"></a>
-<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/biki-cloud/miccle-django-app" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/biki-cloud/miccle-django-app.svg" alt="Coverage"></a>
+<a href="https://github.com/biki-cloud/event-matching-service/actions?query=workflow%3ATest" target="_blank"><img src="https://github.com/biki-cloud/event-matching-service/workflows/Test/badge.svg" alt="Test"></a>
+<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/biki-cloud/event-matching-service" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/biki-cloud/event-matching-service.svg" alt="Coverage"></a>
 
 
 ## 概要
@@ -36,12 +36,12 @@ $ ./scripts/db_reset.sh
 ```bash
 # EC2インスタンスにログイン
 $ ssh ec2
-$ cd miccle-django-app
+$ cd event-matching-service
 $ git stash -u
 $ git pull origin main
 $ docker-compose -f docker-compose-local.yaml down
 $ docker-compose -f docker-compose-local.yaml up --build
-$ docker exec -it miccle bash
+$ docker exec -it event-matching-service bash
 # 正常に実行することを確認
 $ ./reset_db.sh
 # コンテナを抜ける
