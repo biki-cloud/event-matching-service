@@ -36,6 +36,7 @@ for entry in data["organizers"]:
             description=event_info["event_description"],
             organizer=organizer_profile,
             status=event_info["event_status"],
+            image=event_info["event_image"],
         )
 
 # Vendorを作成
