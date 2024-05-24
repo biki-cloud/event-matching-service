@@ -98,6 +98,24 @@ $ pip install -r requirements.txt
 ```
 またはdockerコンテナを構築
 
+## バックアップ
+```bash
+# バックアップを取る
+$ python manage.py dbbackup
+# ファイル名指定してバックアップを取る
+$ python manage.py dbbackup -o <file name>
+# 古いファイルは削除してバックアップを取る
+$ python manage.py dbbackup --clean
+# データをリストア(復元)する
+$ python manage.py dbrestore
+# バックアップファイルを指定してデータをリストア(復元)する
+$ python manage.py dbrestore -i <file name>
+# メディアファイルのバックアップ
+$ python manage.py mediabackup
+# メディアファイルのリストア
+$ python manage.py mediarestore
+```
+
 # 参考ドキュメント
 
 ## Djangoについて
@@ -130,6 +148,9 @@ $ pip install -r requirements.txt
 - [E2Eテスト（ブラウザ画面テスト）｜テストコードのすすめ（Django編）](https://zenn.dev/hideoamezawa/books/study_testcode/viewer/6_e2e_test)
 - [Writing tests | Playwright Python](https://playwright.dev/python/docs/writing-tests)
 - [playwright-pythonを使ってE2Eテストを始める](https://zenn.dev/yusukeiwaki/articles/8e2b159a8d90bf)
+
+## バックアップ
+- [Djangoでデータベースのバックアップを取る方法&外部ストレージとの連携方法 - Djangoの学習ができるチュートリアルサイトDjangoBrothers](https://djangobrothers.com/blogs/djang_dbbackup/)
 
 # TODO
 - バックアップ機能

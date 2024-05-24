@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "organizer.apps.OrganizerConfig",
     "vendor.apps.VendorConfig",
+    "dbbackup",  # バックアップ用
 ]
 
 MIDDLEWARE = [
@@ -234,3 +235,13 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+# バックアップ設定
+# ファイルでバックアップを行う設定
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+# BASE_DIR/backups/にバックアップファイルを保存する設定
+DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backups")}
+# 最新の3つのファイルを保存(それより古いものは順番に破棄)する設定
+DBBACKUP_CLEANUP_KEEP = 3
+# メディアのバックアップファイルも同様の設定
+DBBACKUP_CLEANUP_KEEP_MEDIA = 3
