@@ -154,8 +154,8 @@ $ python manage.py mediarestore
 - [Djangoでデータベースのバックアップを取る方法&外部ストレージとの連携方法 - Djangoの学習ができるチュートリアルサイトDjangoBrothers](https://djangobrothers.com/blogs/djang_dbbackup/)
 
 # TODO
-- /xxxx/2などURL指定して自己紹介ページを作成する。organizerとかvendorの
 - vendorやorganizerを検索するための機能作成
+- /xxxx/2などURL指定して自己紹介ページを作成する。organizerとかvendorの
+- アカウントの電話番号設定項目もいるか
 - 共有ボタン
-- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
 - ソーシャルログイン機能
