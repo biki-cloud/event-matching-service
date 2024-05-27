@@ -5,6 +5,10 @@ services:
   event-matching-service:
     build:
       dockerfile: Dockerfile # Dockerfileのディレクトリを指定します
+    command:
+      bash -c 'python manage.py makemigrations &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000'
     volumes:
       - '.:/app'
     ports:
@@ -12,7 +16,5 @@ services:
     container_name: event-matching-service
     tty: true # ポート待受とかしていないコンテナの場合、trueに設定しておくとコンテナが起動し続けます
     working_dir: '/app'
-    # 開発環境でのコマンドを指定します
-    command: python manage.py runserver 0.0.0.0:8000
     env_file:
       - .env
