@@ -6,8 +6,7 @@ services:
     build:
       dockerfile: Dockerfile # Dockerfileのディレクトリを指定します
     command:
-      bash -c 'python manage.py makemigrations &&
-      python manage.py migrate &&
+      bash -c './scripts/reset_db.sh &&
       python manage.py loaddata fixtures/init_data.json &&
       python manage.py runserver 0.0.0.0:8000'
     volumes:
