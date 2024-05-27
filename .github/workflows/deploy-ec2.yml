@@ -20,6 +20,10 @@ jobs:  # ワークフロー内で実行されるジョブを定義します。
       EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
       EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
     steps:  # ジョブ内で実行されるステップを定義します。
+      - name: Fix file permissions
+        run: |
+          sudo chown -R $USER:$USER /home/ec2-user/django_fullstack/actions-runner/_work/event-matching-service/event-matching-service
+          sudo chmod -R u+rwx /home/ec2-user/django_fullstack/actions-runner/_work/event-matching-service/event-matching-service
       - name: Checkout  # ステップの名前を定義します。
         uses: actions/checkout@v4  # GitHubのリポジトリをチェックアウトします。
       - run: docker compose -f docker-compose-local.yaml down  # Docker Composeを使用してアプリケーションをビルドします。
