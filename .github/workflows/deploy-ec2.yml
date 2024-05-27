@@ -7,6 +7,8 @@ on:  # このワークフローがトリガーされるイベントを定義し�
     branches:
       - main  # mainブランチへのpushでワークフローが開始されます。
 
+permissions: write-all
+
 jobs:  # ワークフロー内で実行されるジョブを定義します。
   deploy:  # ジョブの名前を定義します。
     runs-on:  # ジョブが実行されるランナーを定義します。
