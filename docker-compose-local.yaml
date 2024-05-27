@@ -3,6 +3,7 @@
 version: '3'
 services:
   event-matching-service:
+    name: event-matching-service
     build:
       dockerfile: Dockerfile # Dockerfileのディレクトリを指定します
     command:
