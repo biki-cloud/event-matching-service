@@ -114,6 +114,8 @@ $ python manage.py dbrestore -i <file name>
 $ python manage.py mediabackup
 # メディアファイルのリストア
 $ python manage.py mediarestore
+
+$ python manage.py dumpdata > fixtures/init_data.json
 ```
 
 # 参考ドキュメント
