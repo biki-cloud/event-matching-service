@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block left-sidebar-content %}
+<aside id="sidebar">
+  <div class="d-flex">
+    <button class="toggle-btn" type="button">
+      <i class="lni lni-grid-alt"></i>
+    </button>
+    <div class="sidebar-logo">
+      <a href="#">event-matching-service</a>
+    </div>
+  </div>
+
+  <ul class="sidebar-nav">
+    <li class="sidebar-item">
+      <a href="{% url 'event_list' %}" class="sidebar-link">
+        <i class="lni lni-pizza"></i>
+        <span>イベント</span>
+      </a>
+    </li>
+  </ul>
+  <li class="sidebar-item">
+    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth" aria-expanded="false" aria-controls="auth" id="auth_link">
+      <i class="lni lni-user"></i>
+      {% if request.user.is_authenticated %}
+        <span>{{ request.user }}</span>
+      {% else %}
+        <span>No login</span>
+      {% endif %}
+    </a>
+    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+      {% if request.user.is_authenticated %}
+        <li class="sidebar-item">
+          <a href="accounts/profile" class="sidebar-link">User Info</a>
+        </li>
+        <li class="sidebar-item">
+          <a href="accounts/profile_edit" class="sidebar-link">Edit</a>
+        </li>
+        <li class="sidebar-item">
+          <a href="{% url 'account_logout' %}" class="sidebar-link">Logout</a>
+        </li>
+      {% else %}
+        <li class="sidebar-item">
+          <a href="{% url 'account_signup' %}" class="sidebar-link">Register</a>
+        </li>
+        <li class="sidebar-item">
+          <a href="{% url 'account_login' %}?next={{ request.path }}" class="sidebar-link">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </li>
+</aside>
+<script src="{% static 'js/left-sidebar.js' %}"></script>
+{% endblock %}

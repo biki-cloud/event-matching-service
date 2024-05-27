@@ -129,6 +129,7 @@ $ python manage.py mediarestore
 ## html/cssについて
 - [codzsword/sidebar-bootstrap](https://github.com/codzsword/sidebar-bootstrap/tree/main)
 - [Explore and Download 8400+ Essential SVG Icons - Line icons](https://lineicons.com/icons)
+- [Form controls · Bootstrap v5.3](https://getbootstrap.com/docs/5.3/forms/form-control/)
 
 ## 認証について(allauth)
 - [Djangoでdjango-allauthとCustomUserを使った認証機能を作成](https://zenn.dev/kei_h74/articles/31faae563f7354)
@@ -154,6 +155,7 @@ $ python manage.py mediarestore
 
 # TODO
 - vendorやorganizerを検索するための機能作成
+- /xxxx/2などURL指定して自己紹介ページを作成する。organizerとかvendorの
+- アカウントの電話番号設定項目もいるか
 - 共有ボタン
-- EDIT,detailするときにとりあえずかっこいい画面を設定したい。手軽に
 - ソーシャルログイン機能
