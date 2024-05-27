@@ -16,5 +16,5 @@ services:
     container_name: event-matching-service
     tty: true # ポート待受とかしていないコンテナの場合、trueに設定しておくとコンテナが起動し続けます
     working_dir: '/app'
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
